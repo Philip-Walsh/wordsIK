@@ -1,0 +1,22 @@
+[
+    { "code": "ar", "name": "Arabic", "dir": "rtl" },
+    { "code": "da", "name": "Danish", "dir": "ltr" },
+    { "code": "fr", "name": "French", "dir": "ltr" },
+    { "code": "es", "name": "Spanish", "dir": "ltr" },
+    { "code": "ru", "name": "Russian", "dir": "ltr" },
+    { "code": "it", "name": "Italian", "dir": "ltr" },
+    { "code": "ja", "name": "Japanese", "dir": "ltr" },
+    { "code": "de", "name": "German", "dir": "ltr" },
+    { "code": "pt", "name": "Portuguese", "dir": "ltr" },
+    { "code": "ko", "name": "Korean", "dir": "ltr" },
+    { "code": "sw", "name": "Swahili", "dir": "ltr" },
+    { "code": "nl", "name": "Dutch", "dir": "ltr" },
+    { "code": "el", "name": "Greek", "dir": "ltr" },
+    { "code": "pl", "name": "Polish", "dir": "ltr" },
+    { "code": "id", "name": "Indonesian", "dir": "ltr" },
+    { "code": "hi", "name": "Hindi", "dir": "ltr" },
+    { "code": "nn", "name": "Norwegian Nynorsk", "dir": "ltr" },
+    { "code": "tr", "name": "Turkish", "dir": "ltr" },
+    { "code": "he", "name": "Hebrew", "dir": "rtl" },
+    { "code": "sv", "name": "Swedish", "dir": "ltr" }
+]

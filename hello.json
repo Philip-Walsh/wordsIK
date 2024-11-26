@@ -1,0 +1,75 @@
+{
+    "hello": {
+        "translation": "Hello",
+        "languages": {
+            "ar": {
+                "native": "مرحبا",
+                "transliteration": "Marhaban"
+            },
+            "da": {
+                "native": "Hej"
+            },
+            "fr": {
+                "native": "Bonjour",
+                "transliteration": "Bonjour"
+            },
+            "es": {
+                "native": "Hola"
+            },
+            "ru": {
+                "native": "Привет",
+                "transliteration": "Privet"
+            },
+            "it": {
+                "native": "Ciao"
+            },
+            "ja": {
+                "native": "こんにちは",
+                "transliteration": "Konnichiwa"
+            },
+            "de": {
+                "native": "Hallo"
+            },
+            "pt": {
+                "native": "Olá"
+            },
+            "ko": {
+                "native": "안녕하세요",
+                "transliteration": "Annyeonghaseyo"
+            },
+            "sw": {
+                "native": "Habari"
+            },
+            "nl": {
+                "native": "Hallo"
+            },
+            "el": {
+                "native": "Γειά",
+                "transliteration": "Geiá"
+            },
+            "pl": {
+                "native": "Cześć"
+            },
+            "id": {
+                "native": "Halo"
+            },
+            "hi": {
+                "native": "नमस्ते",
+                "transliteration": "Namaste"
+            },
+            "nn": {
+                "native": "Hei"
+            },
+            "tr": {
+                "native": "Merhaba"
+            },
+            "he": {
+                "native": "שלום",
+                "transliteration": "Shalom"
+            },
+            "sv": {
+                "native": "Hej"
+            }
+        }
+    }
+}
