@@ -16,6 +16,9 @@
             "es": {
                 "native": "Hola"
             },
+            "en": {
+                "native": "Hello"
+            },
             "ru": {
                 "native": "Привет",
                 "transliteration": "Privet"
