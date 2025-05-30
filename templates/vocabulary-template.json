@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "language": "en",
+    "grade": "1",
+    "category": "example-category",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20",
+    "contributor": "your-github-username"
+  },
+  "words": [
+    {
+      "word": "example",
+      "definition": "A clear and concise definition of the word",
+      "example": "A sentence showing how to use the word correctly",
+      "difficulty": "easy|medium|hard",
+      "tags": ["category1", "category2"],
+      "pronunciation": "ɪɡˈzæmpəl",
+      "synonyms": ["synonym1", "synonym2"],
+      "antonyms": ["antonym1", "antonym2"],
+      "notes": "Any additional information or context"
+    }
+  ],
+  "validation": {
+    "spellingVerified": true,
+    "grammarChecked": true,
+    "ageAppropriate": true,
+    "culturallySensitive": true
+  }
+} 

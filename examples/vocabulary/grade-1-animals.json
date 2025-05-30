@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "language": "en",
+    "grade": "1",
+    "category": "animals",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20",
+    "contributor": "example-teacher",
+    "tags": ["animals", "pets", "farm", "wildlife"]
+  },
+  "words": [
+    {
+      "word": "cat",
+      "definition": "A small pet that meows",
+      "example": "The cat likes to play with yarn.",
+      "difficulty": "easy",
+      "tags": ["pets", "mammals"],
+      "pronunciation": "kæt",
+      "synonyms": ["feline", "kitty"],
+      "antonyms": [],
+      "notes": "Common first pet for children"
+    },
+    {
+      "word": "dog",
+      "definition": "A friendly pet that barks",
+      "example": "The dog wagged its tail happily.",
+      "difficulty": "easy",
+      "tags": ["pets", "mammals"],
+      "pronunciation": "dɒɡ",
+      "synonyms": ["puppy", "canine"],
+      "antonyms": [],
+      "notes": "Known as man's best friend"
+    }
+  ],
+  "validation": {
+    "spellingVerified": true,
+    "grammarChecked": true,
+    "ageAppropriate": true,
+    "culturallySensitive": true
+  }
+} 

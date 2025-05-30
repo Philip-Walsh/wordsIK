@@ -1,0 +1,20 @@
+{
+  "name": "words-i-know",
+  "version": "1.0.0",
+  "description": "Educational vocabulary repository with content validation",
+  "scripts": {
+    "validate": "node validation/profanity-check.js"
+  },
+  "dependencies": {
+    "bad-words": "^3.0.4"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0"
+  },
+  "lint-staged": {
+    "*.json": [
+      "node validation/profanity-check.js"
+    ]
+  }
+} 

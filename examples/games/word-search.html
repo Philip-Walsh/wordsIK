@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Word Search Game</title>
+    <style>
+        .word-search {
+            display: grid;
+            gap: 2px;
+            margin: 20px;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .selected {
+            background-color: #e0e0ff;
+        }
+
+        .found {
+            background-color: #90EE90;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Word Search Game</h1>
+    <div id="wordList"></div>
+    <div id="grid" class="word-search"></div>
+
+    <script>
+        // Example of how to use the vocabulary data
+        async function loadVocabulary() {
+            const response = await fetch('https://raw.githubusercontent.com/yourusername/words-i-know/main/data/vocabulary/en/grade-1/animals.json');
+            const data = await response.json();
+            return data.words.map(w => w.word.toUpperCase());
+        }
+
+        async function initGame() {
+            const words = await loadVocabulary();
+            const gridSize = 10;
+            const grid = document.getElementById('grid');
+            const wordList = document.getElementById('wordList');
+
+            // Display word list
+            words.forEach(word => {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.style.margin = '10px';
+                wordList.appendChild(span);
+            });
+
+            // Create grid
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        initGame();
+    </script>
+</body>
+
+</html>

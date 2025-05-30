@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "language": "en",
+    "grade": "1",
+    "week": "1",
+    "theme": "short-vowel-a",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20"
+  },
+  "spellingRule": {
+    "description": "Words with short 'a' sound",
+    "pattern": "CVC (Consonant-Vowel-Consonant)",
+    "examples": ["cat", "hat", "mat"],
+    "rule": "When a vowel is followed by a consonant, it usually makes its short sound"
+  },
+  "words": [
+    {
+      "word": "cat",
+      "phonetic": "/kæt/",
+      "syllables": ["cat"],
+      "difficulty": "easy",
+      "practice": {
+        "sentences": [
+          "The cat sat on the mat.",
+          "I see a black cat."
+        ],
+        "rhymingWords": ["hat", "bat", "rat"]
+      }
+    },
+    {
+      "word": "hat",
+      "phonetic": "/hæt/",
+      "syllables": ["hat"],
+      "difficulty": "easy",
+      "practice": {
+        "sentences": [
+          "I wear my hat in the sun.",
+          "The hat is red."
+        ],
+        "rhymingWords": ["cat", "bat", "rat"]
+      }
+    }
+  ],
+  "activities": [
+    {
+      "type": "word-sort",
+      "description": "Sort words by their vowel sound",
+      "categories": ["short-a", "other"]
+    },
+    {
+      "type": "fill-in-blank",
+      "description": "Complete the word with the correct vowel",
+      "words": ["c_t", "h_t", "m_t"]
+    }
+  ]
+} 

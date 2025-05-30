@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spelling Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .word-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .word {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            font-size: 18px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Spelling Test</h1>
+    <div id="test-container"></div>
+    <button onclick="checkAnswers()">Check Answers</button>
+
+    <script>
+        async function loadSpellingList() {
+            const response = await fetch('https://raw.githubusercontent.com/yourusername/words-i-know/main/data/spelling/en/grade-1/week-1.json');
+            const data = await response.json();
+            return data.words;
+        }
+
+        async function initTest() {
+            const words = await loadSpellingList();
+            const container = document.getElementById('test-container');
+
+            words.forEach((word, index) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-container';
+
+                const wordSpan = document.createElement('div');
+                wordSpan.className = 'word';
+                wordSpan.textContent = `Word ${index + 1}: ${word.practice.sentences[0]}`;
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'input';
+                input.dataset.correctWord = word.word;
+
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+
+                wordDiv.appendChild(wordSpan);
+                wordDiv.appendChild(input);
+                wordDiv.appendChild(feedback);
+                container.appendChild(wordDiv);
+            });
+        }
+
+        function checkAnswers() {
+            const inputs = document.querySelectorAll('.input');
+            inputs.forEach(input => {
+                const feedback = input.nextElementSibling;
+                if (input.value.toLowerCase() === input.dataset.correctWord.toLowerCase()) {
+                    feedback.textContent = 'Correct!';
+                    feedback.className = 'feedback correct';
+                } else {
+                    feedback.textContent = `Incorrect. The correct spelling is: ${input.dataset.correctWord}`;
+                    feedback.className = 'feedback incorrect';
+                }
+            });
+        }
+
+        initTest();
+    </script>
+</body>
+
+</html>
