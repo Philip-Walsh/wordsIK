@@ -1,30 +1,41 @@
 # WordsIK - Educational Vocabulary Repository
 
+![Words I Know Banner 🍎](docs/assets/banner.png "Title")
+
 A collaborative repository for educational vocabulary, grammar, and spelling resources that can be used to build language learning games and applications. Built with robust quality assurance and multi-language support.
 
 ## 🚀 Features
 
-- **Multi-language Support: English, Spanish, French, Arabic, Korean with extensible structure
+- **Multi-language Support**: English, Spanish, French, Arabic, Korean with extensible structure
 - **Quality Assurance**: Automated validation, spell checking, and content filtering
 - **CI/CD Pipeline**: Comprehensive GitHub Actions workflow with security scanning
 - **Educational Focus**: Age-appropriate content organized by grade levels
 - **Cultural Sensitivity**: Built-in checks for inclusive and appropriate language
+- **TypeScript**: Full TypeScript support with strict type checking
+- **Modern Tooling**: ESLint, Prettier, Jest, and Husky for code quality
 
 ## 📁 Repository Structure
 
 ```
 .
-├── data/               # Main content directory
-│   ├── vocabulary/     # Vocabulary content by language and grade
-│   ├── grammar/        # Grammar lessons and exercises
-│   └── spelling/       # Spelling lists and activities
-├── validation/         # Content validation tools
-│   ├── profanity-check.js      # Basic profanity filtering
-│   └── enhanced-validator.js   # Multi-language validation
-├── docs/              # Documentation and guidelines
-├── templates/         # JSON templates for new contributions
+├── src/                # TypeScript source code
+│   ├── cli.ts         # Command-line interface
+│   ├── ValidationManager.ts # Main validation logic
+│   ├── utils/         # Utility functions
+│   │   ├── Logger.ts  # Logging with chalk support
+│   │   ├── FileUtils.ts # File operations
+│   │   └── ReviewGenerator.ts # Code review generation
+│   ├── validators/    # Content validation modules
+│   └── types/         # TypeScript type definitions
+├── data/              # Main content directory
+│   ├── vocabulary/    # Vocabulary content by language and grade
+│   ├── grammar/       # Grammar lessons and exercises
+│   └── spelling/      # Spelling lists and activities
+├── validation/        # Content validation tools
+├── docs/             # Documentation and guidelines
+├── templates/        # JSON templates for new contributions
 ├── .github/workflows/ # CI/CD pipeline configuration
-└── examples/          # Sample content and activities
+└── examples/         # Sample content and activities
 ```
 
 ## 🔧 Quality Assurance System
@@ -45,19 +56,26 @@ Our CI/CD pipeline runs on every pull request and includes:
    - Profanity filtering using `bad-words` library
    - Structure validation for educational content
 
-3. **Spell Checking**
+3. **Code Quality**
+
+   - TypeScript compilation with strict mode
+   - ESLint with TypeScript rules
+   - Jest unit testing
+   - Pre-commit hooks with lint-staged
+
+4. **Spell Checking**
 
    - Multi-language spell checking with cspell
    - Built-in dictionaries for English, Spanish, and French
    - Custom educational terminology support
 
-4. **Documentation Linting**
+5. **Documentation Linting**
 
    - Vale integration for writing quality
    - Microsoft style guide compliance
    - Write-good and proselint rules
 
-5. **Multi-language Validation**
+6. **Multi-language Validation**
    - UTF-8 encoding verification
    - Language-specific character validation
    - Translation consistency checks
@@ -68,16 +86,29 @@ Our CI/CD pipeline runs on every pull request and includes:
 # Install dependencies
 npm install
 
+# Build TypeScript
+npm run build
+
 # Run all validations
 npm run validate-all
 
 # Check specific content
 npm run validate-json
-npm run spell-check
-npm run lint
+npm run validate-content
+npm run validate-translations
 
-# Validate single file
-node validation/enhanced-validator.js data/vocabulary/en/grade-1/week-1.json
+# Run tests
+npm test
+
+# Lint code
+npm run lint:ts
+npm run lint:fix
+
+# Spell check
+npm run spell-check
+
+# Clean build artifacts
+npm run clean
 ```
 
 ## 📝 Content Format
@@ -123,6 +154,8 @@ Each vocabulary file follows this JSON structure:
 - **English (en)**: Primary language with comprehensive content
 - **Spanish (es)**: Full vocabulary and grammar support
 - **French (fr)**: Complete educational content
+- **Arabic (ar)**: Basic vocabulary support
+- **Korean (ko)**: Basic vocabulary support
 
 ### Adding New Languages
 
@@ -159,6 +192,8 @@ We welcome contributions from teachers, linguists, and educational content creat
 5. **Run validation locally**:
    ```bash
    npm run validate-all
+   npm run lint:ts
+   npm test
    ```
 6. **Submit a pull request**
 
@@ -173,6 +208,8 @@ All contributions must pass:
 - ✅ No sensitive information
 - ✅ Follows established structure
 - ✅ Passes all automated checks
+- ✅ TypeScript compilation without errors
+- ✅ ESLint rules compliance
 
 ### Pre-commit Hooks
 
@@ -182,6 +219,8 @@ The repository includes pre-commit hooks that automatically:
 - Check for profanity
 - Run spell checking
 - Verify content structure
+- Lint TypeScript code
+- Run unit tests
 
 ## 🔒 Security & Privacy
 
@@ -203,8 +242,8 @@ This repository is designed to be used as a data source for:
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm or yarn
+- Node.js (v18 or higher)
+- npm (v8 or higher)
 - Git
 
 ### Setup
@@ -220,6 +259,9 @@ npm install
 # Set up pre-commit hooks
 npm run prepare
 
+# Build the project
+npm run build
+
 # Run validation
 npm run validate-all
 ```
@@ -230,8 +272,14 @@ npm run validate-all
 # Run all tests
 npm test
 
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+
 # Validate specific content
-node validation/enhanced-validator.js data/
+npm run validate-content
 
 # Check documentation
 vale docs/ *.md

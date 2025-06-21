@@ -1,18 +1,20 @@
 #!/usr/bin/env node
+import fs from 'fs';
 
 import { Command } from 'commander';
 import chalk from 'chalk';
 import boxen from 'boxen';
-import { ValidationManager } from './ValidationManager';
-import { ReportGenerator } from './utils/ReportGenerator';
-import { Logger, LogLevel } from './utils/Logger';
-import { CLIOptions } from './types';
+import { ValidationManager } from './ValidationManager.js';
+import { ReportGenerator } from './utils/ReportGenerator.js';
+import { Logger, LogLevel } from './utils/Logger.js';
+import { CLIOptions } from './types/index.js';
+import { ReviewGenerator } from './utils/ReviewGenerator.js';
 
 const program = new Command();
 
 const banner = boxen(
-    chalk.blue.bold('WordsIK CLI') + '\n' +
-    chalk.gray('Multilingual Educational Content Validator'),
+    `${chalk.blue.bold('WordsIK CLI')  }\n${ 
+    chalk.gray('Multilingual Educational Content Validator')}`,
     {
         padding: 1,
         margin: 1,
@@ -23,7 +25,7 @@ const banner = boxen(
 
 program
     .name('wordsik')
-    .description('CLI tool for validating multilingual educational content')
+    .description('WordsIK CLI for content validation and code review')
     .version('1.0.0')
     .addHelpText('before', banner);
 
@@ -64,9 +66,9 @@ program
             const report = generator.generateReport(result);
 
             if (options.output === 'json') {
-                console.log(JSON.stringify(result, null, 2));
+                logger.info(JSON.stringify(result, null, 2));
             } else {
-                console.log(report);
+                logger.info(report);
             }
 
             const shouldFail = !result.success || (options.failOnWarnings && result.warnings.length > 0);
@@ -81,7 +83,7 @@ program
             logger.close();
         } catch (error) {
             const logger = new Logger();
-            logger.error('Validation failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.error('Validation failed', 'CLI', { error: error instanceof Error ? error.message : 'Unknown error' });
             logger.close();
             process.exit(1);
         }
@@ -95,7 +97,7 @@ program
     .option('--debug', 'Enable debug logging')
     .option('--log-file <file>', 'Write logs to file')
     .option('--no-colors', 'Disable colored output')
-    .action(async (options: { output: string; verbose?: boolean; debug?: boolean; logFile?: string; colors?: boolean }) => {
+    .action(async (options: { output: 'text' | 'json' | 'markdown'; verbose?: boolean; debug?: boolean; logFile?: string; colors?: boolean }) => {
         try {
             const logger = new Logger({
                 level: options.debug ? LogLevel.DEBUG : options.verbose ? LogLevel.VERBOSE : LogLevel.INFO,
@@ -107,18 +109,18 @@ program
             logger.section('Language Status Check');
             logger.info('Checking language status', 'CLI');
 
-            const manager = new ValidationManager({ languages: true, output: options.output });
+            const manager = new ValidationManager({ languages: true });
             const result = await manager.runValidation();
 
             const generator = new ReportGenerator(options.output);
             const report = generator.generateStatusReport(result);
 
-            console.log(report);
+            logger.info(report);
             logger.success('Status check completed', 'CLI');
             logger.close();
         } catch (error) {
             const logger = new Logger();
-            logger.error('Status check failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.error('Status check failed', 'CLI', { error: error instanceof Error ? error.message : 'Unknown error' });
             logger.close();
             process.exit(1);
         }
@@ -148,21 +150,40 @@ program
             const template = await manager.generateTranslationTemplate(file, language);
 
             if (options.output) {
-                const fs = require('fs');
                 fs.writeFileSync(options.output, JSON.stringify(template, null, 2));
                 logger.success(`Template saved to ${options.output}`, 'CLI');
             } else {
-                console.log(JSON.stringify(template, null, 2));
+                logger.info(JSON.stringify(template, null, 2));
                 logger.success('Template generated successfully', 'CLI');
             }
 
             logger.close();
         } catch (error) {
             const logger = new Logger();
-            logger.error('Template generation failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.error('Template generation failed', 'CLI', { error: error instanceof Error ? error.message : 'Unknown error' });
             logger.close();
             process.exit(1);
         }
+    });
+
+program
+    .command('review')
+    .description('Generate code reviews for Cursor with web search integration')
+    .option('--files <files...>', 'Files to review (default: all changed files)')
+    .option('--output <format>', 'Output format (cursor, markdown, json)', 'cursor')
+    .option('--web-search', 'Enable web search for context and best practices')
+    .option('--ai-enhanced', 'Use AI to enhance review quality')
+    .option('--verbose', 'Verbose output')
+    .option('--log-file <file>', 'Log file path')
+    .option('--template <template>', 'Review template to use')
+    .option('--focus <focus>', 'Focus areas (security, performance, style, docs)')
+    .action(async (options) => {
+        const reviewGenerator = new ReviewGenerator(new Logger({
+            level: options.verbose ? LogLevel.VERBOSE : LogLevel.INFO,
+            verbose: options.verbose,
+            logFile: options.logFile
+        }));
+        await reviewGenerator.generateReview(options);
     });
 
 program.parse();

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     preset: 'ts-jest',
     testEnvironment: 'node',
     roots: ['<rootDir>/src'],
@@ -13,4 +13,23 @@ module.exports = {
     ],
     coverageDirectory: 'coverage',
     coverageReporters: ['text', 'lcov', 'html'],
+    extensionsToTreatAsEsm: ['.ts'],
+    globals: {
+        'ts-jest': {
+            useESM: true,
+        },
+    },
+    moduleNameMapper: {
+        '^../utils/Logger$': '<rootDir>/src/__mocks__/Logger.ts',
+        '^./utils/Logger$': '<rootDir>/src/__mocks__/Logger.ts',
+        '^src/utils/Logger$': '<rootDir>/src/__mocks__/Logger.ts',
+        '^@/utils/Logger$': '<rootDir>/src/__mocks__/Logger.ts',
+    },
+    automock: false,
+    resetMocks: true,
+    restoreMocks: true,
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        'src/__tests__/__mocks__/mockLogger.ts'
+    ],
 }; 

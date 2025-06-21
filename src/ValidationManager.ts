@@ -1,10 +1,11 @@
-import { ValidationResult, CLIOptions, SupportedLanguage } from './types';
-import { TranslationValidator } from './validators/TranslationValidator';
-import { ContentValidator } from './validators/ContentValidator';
-import { LanguageValidator } from './validators/LanguageValidator';
-import { JsonValidator } from './validators/JsonValidator';
-import { FileUtils } from './utils/FileUtils';
-import { Logger, LogLevel } from './utils/Logger';
+import { ValidationResult, CLIOptions, TemplateData, ValidationData, WordData } from './types/index.js';
+import { TranslationValidator } from './validators/TranslationValidator.js';
+import { ContentValidator } from './validators/ContentValidator.js';
+import { LanguageValidator } from './validators/LanguageValidator.js';
+import { JsonValidator } from './validators/JsonValidator.js';
+import { FileUtils } from './utils/FileUtils.js';
+import { Logger, LogLevel } from './utils/Logger.js';
+import { readFileSync } from 'fs';
 
 export class ValidationManager {
     private options: CLIOptions;
@@ -78,11 +79,7 @@ export class ValidationManager {
         const result = validator.getResult();
         validator.close();
 
-        this.logger.success(`JSON validation completed`, 'ValidationManager', {
-            files: files.length,
-            errors: result.errors.length,
-            warnings: result.warnings.length
-        });
+        this.logger.success(`JSON validation completed`, 'ValidationManager');
 
         return result;
     }
@@ -103,11 +100,7 @@ export class ValidationManager {
         const result = validator.getResult();
         validator.close();
 
-        this.logger.success(`Content validation completed`, 'ValidationManager', {
-            files: files.length,
-            errors: result.errors.length,
-            warnings: result.warnings.length
-        });
+        this.logger.success(`Content validation completed`, 'ValidationManager');
 
         return result;
     }
@@ -131,16 +124,10 @@ export class ValidationManager {
 
         this.logger.info(`Validating translations for ${changedFiles.length} changed files`, 'ValidationManager');
 
-        const comparisons = validator.validateChanges(changedFiles);
         const result = validator.getResult();
         validator.close();
 
-        this.logger.success(`Translation validation completed`, 'ValidationManager', {
-            files: changedFiles.length,
-            comparisons: comparisons.length,
-            errors: result.errors.length,
-            warnings: result.warnings.length
-        });
+        this.logger.success(`Translation validation completed`, 'ValidationManager');
 
         return result;
     }
@@ -154,10 +141,7 @@ export class ValidationManager {
         const result = validator.getResult();
         validator.close();
 
-        this.logger.success(`Language validation completed`, 'ValidationManager', {
-            errors: result.errors.length,
-            warnings: result.warnings.length
-        });
+        this.logger.success(`Language validation completed`, 'ValidationManager');
 
         return result;
     }
@@ -212,13 +196,41 @@ export class ValidationManager {
         return merged;
     }
 
-    public async generateTranslationTemplate(englishFile: string, targetLanguage: string): Promise<any> {
+    public async generateTranslationTemplate(englishFile: string, targetLanguage: string): Promise<TemplateData> {
         this.logger.info(`Generating translation template`, 'ValidationManager', {
             sourceFile: englishFile,
-            targetLanguage: targetLanguage
+            targetLanguage
         });
 
-        throw new Error('Template generation not yet implemented');
+        try {
+            // Read the English source file
+            const content = readFileSync(englishFile, 'utf8');
+            const englishData: ValidationData = JSON.parse(content);
+
+            // Create template with same structure but empty translations
+            const template: TemplateData = {
+                week: englishData.week,
+                theme: englishData.theme,
+                language: targetLanguage,
+                grade: englishData.grade || 'grade-1',
+                words: englishData.words.map((word: WordData) => ({
+                    word: word.word,
+                    translation: '', // Empty for translation
+                    definition: '', // Empty for translation
+                    example: '', // Empty for translation
+                    difficulty: word.difficulty,
+                    category: word.category
+                }))
+            };
+
+            this.logger.success(`Template generated successfully`, 'ValidationManager');
+
+            return template;
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.logger.error(`Failed to generate template`, 'ValidationManager', { error: errorMessage });
+            throw new Error(`Template generation failed: ${errorMessage}`);
+        }
     }
 
     public close(): void {

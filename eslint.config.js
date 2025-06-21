@@ -22,6 +22,16 @@ export default [
                 module: 'readonly',
                 require: 'readonly',
                 exports: 'readonly',
+                // Jest globals
+                describe: 'readonly',
+                it: 'readonly',
+                test: 'readonly',
+                expect: 'readonly',
+                beforeEach: 'readonly',
+                afterEach: 'readonly',
+                beforeAll: 'readonly',
+                afterAll: 'readonly',
+                jest: 'readonly',
             },
         },
         plugins: {
@@ -33,6 +43,11 @@ export default [
             '@typescript-eslint/explicit-function-return-type': 'warn',
             '@typescript-eslint/no-explicit-any': 'warn',
             'prefer-const': 'error',
+            'no-console': 'off',
+            'no-debugger': 'error',
+            'prefer-template': 'error',
+            'object-shorthand': 'error',
+            'prefer-arrow-callback': 'error'
         },
     },
     {
@@ -41,8 +56,10 @@ export default [
             ecmaVersion: 2022,
             sourceType: 'module',
         },
-    },
-    {
-        rules: {},
-    },
+        rules: {
+            'no-console': 'off',
+            'no-debugger': 'error',
+            'prefer-const': 'error'
+        }
+    }
 ]; 

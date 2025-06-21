@@ -83,16 +83,24 @@ jobs:
 
       - name: Run TruffleHog
         run: |
-          docker run --rm -v "$(pwd):/repo" trufflesecurity/trufflehog:latest \
-            --only-verified --fail /repo
+          docker run --rm -v "$(pwd):/repo" trufflesecurity/trufflehog:latest filesystem --directory=/repo --only-verified --fail
 
-  # Documentation linting
-  docs:
-    name: Documentation Linting
+  # Documentation and content validation
+  docs-and-content:
+    name: Documentation & Content Validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Install Vale
         run: |
@@ -113,23 +121,6 @@ jobs:
 
       - name: Spell check
         run: npx cspell "docs/**/*.md" "*.md"
-
-  # Code quality and validation
-  validation:
-    name: Content Validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Validate JSON files
         run: |
@@ -153,73 +144,12 @@ jobs:
             exit 1
           fi
 
-  # Spell checking
-  spellcheck:
-    name: Multilingual Spell and Grammar Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - run: npm ci
-
-      - name: Run CSpell (English)
-        run: npx cspell "data/**/*.json" --languageId en
-
-      - name: Run CSpell (Spanish)
-        run: npx cspell "data/**/*.json" --languageId es
-
-      - name: Run CSpell (French)
-        run: npx cspell "data/**/*.json" --languageId fr
-
-  # Vale linting for documentation
-  vale:
-    name: Vale Linting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Vale
+      - name: Multilingual spell check
         run: |
-          wget https://github.com/errata-ai/vale/releases/latest/download/vale_2.28.0_Linux_64-bit.tar.gz
-          tar -xzf vale_2.28.0_Linux_64-bit.tar.gz
-          sudo mv vale /usr/local/bin/
-
-      - name: Create Vale config
-        run: |
-          cat > .vale.ini << EOF
-          StylesPath = .vale/styles
-          [*.md]
-          BasedOnStyles = Microsoft, write-good, proselint
-          EOF
-
-      - name: Run Vale
-        run: |
-          echo "Running Vale linting..."
-          vale docs/ *.md CONTRIBUTING.md
-
-  # Multi-language content validation
-  multilingual:
-    name: Multi-Language Validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
+          echo "Running multilingual spell checks..."
+          npx cspell "data/**/*.json" --languageId en
+          npx cspell "data/**/*.json" --languageId es
+          npx cspell "data/**/*.json" --languageId fr
 
       - name: Validate language structure
         run: |
@@ -256,33 +186,17 @@ jobs:
   status:
     name: Status Check
     runs-on: ubuntu-latest
-    needs:
-      [security, validation, spellcheck, vale, multilingual, build-and-validate]
+    needs: [security, docs-and-content, build-and-validate]
     if: always()
     steps:
       - name: Check job status
         run: |
           echo "Checking overall pipeline status..."
           if [ "${{ needs.security.result }}" != "success" ] || \
-             [ "${{ needs.validation.result }}" != "success" ] || \
-             [ "${{ needs.spellcheck.result }}" != "success" ] || \
-             [ "${{ needs.vale.result }}" != "success" ] || \
-             [ "${{ needs.multilingual.result }}" != "success" ] || \
+             [ "${{ needs.docs-and-content.result }}" != "success" ] || \
              [ "${{ needs.build-and-validate.result }}" != "success" ]; then
             echo "❌ One or more checks failed"
             exit 1
           else
             echo "✅ All checks passed"
           fi
-
-  grammarcheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start LanguageTool server
-        run: docker run -d -p 8010:8010 --name languagetool languagetoolorg/languagetool:latest
-      - name: Lint feedback for admin
-        run: |
-          echo "To check grammar, POST text to http://localhost:8010/v2/check for each language."
-          echo "Example: curl --data 'language=en-US&text=This is a test.' http://localhost:8010/v2/check"
-          echo "You can script this to check all your files in all languages."

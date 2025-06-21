@@ -39,6 +39,50 @@ export interface LanguageSummary {
     warnings: number;
 }
 
+// New comprehensive type definitions to replace 'any' types
+export interface WordData {
+    word: string;
+    translation: string;
+    definition: string;
+    example: string;
+    difficulty?: 'easy' | 'medium' | 'hard';
+    category?: string;
+    phonetic?: string;
+    syllables?: string[];
+}
+
+export interface ValidationData {
+    week: string;
+    theme: string;
+    language?: string;
+    grade?: string;
+    words: WordData[];
+}
+
+export interface QualityScore {
+    score: number;
+    checks: number;
+}
+
+export interface ValidationContext {
+    file: string;
+    line?: number;
+    column?: number;
+    context?: string;
+}
+
+export interface LogData {
+    [key: string]: string | number | boolean | object | undefined;
+}
+
+export interface TemplateData {
+    week: string;
+    theme: string;
+    language: string;
+    grade: string;
+    words: WordData[];
+}
+
 export interface VocabularyWord {
     word: string;
     translation: string;
@@ -106,4 +150,46 @@ export interface CLIOptions {
 
 export type SupportedLanguage = 'en' | 'es' | 'fr' | 'ar' | 'ko';
 export type ContentType = 'vocabulary' | 'grammar' | 'spelling';
-export type GradeLevel = 'grade-1' | 'grade-2' | 'grade-3' | 'grade-4' | 'grade-5'; 
+export type GradeLevel = 'grade-1' | 'grade-2' | 'grade-3' | 'grade-4' | 'grade-5';
+
+export interface ValidationOptions {
+    all?: boolean;
+    json?: boolean;
+    content?: boolean;
+    translations?: boolean;
+    languages?: boolean;
+    verbose?: boolean;
+    debug?: boolean;
+    logFile?: string;
+    output?: 'text' | 'json' | 'markdown';
+    files?: string[];
+    failOnWarnings?: boolean;
+}
+
+export interface ReviewOptions {
+    files?: string[];
+    output?: 'cursor' | 'markdown' | 'json';
+    webSearch?: boolean;
+    aiEnhanced?: boolean;
+    verbose?: boolean;
+    logFile?: string;
+    template?: string;
+    focus?: string;
+}
+
+export interface ReviewResult {
+    file: string;
+    issues: ReviewIssue[];
+    suggestions: string[];
+    score: number;
+    summary: string;
+}
+
+export interface ReviewIssue {
+    type: 'error' | 'warning' | 'info' | 'suggestion';
+    line?: number;
+    message: string;
+    code?: string;
+    suggestion?: string;
+    severity: 'high' | 'medium' | 'low';
+} 

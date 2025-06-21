@@ -1,5 +1,5 @@
-import { ValidationResult, ValidationError, ValidationWarning } from '../types';
-import { Logger, LogLevel } from '../utils/Logger';
+import { ValidationResult, ValidationError, ValidationWarning, LogData } from '../types/index.js';
+import { Logger, LogLevel } from '../utils/Logger.js';
 
 export abstract class BaseValidator {
     protected errors: ValidationError[] = [];
@@ -9,7 +9,7 @@ export abstract class BaseValidator {
     constructor(verbose: boolean = false) {
         this.logger = new Logger({
             level: verbose ? LogLevel.DEBUG : LogLevel.INFO,
-            verbose: verbose
+            verbose
         });
     }
 
@@ -45,7 +45,7 @@ export abstract class BaseValidator {
         this.logger.info(message, context);
     }
 
-    protected debug(message: string, context?: string, data?: any): void {
+    protected debug(message: string, context?: string, data?: LogData): void {
         this.logger.debug(message, context, data);
     }
 
@@ -62,11 +62,17 @@ export abstract class BaseValidator {
             success: this.errors.length === 0,
             errors: [...this.errors],
             warnings: [...this.warnings],
-            summary: this.generateSummary()
+            summary: {
+                totalFiles: this.errors.length + this.warnings.length,
+                totalWords: 0,
+                errors: this.errors.length,
+                warnings: this.warnings.length,
+                languages: []
+            }
         };
     }
 
-    protected abstract generateSummary(): any;
+    protected abstract generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] };
 
     public clear(): void {
         this.errors = [];

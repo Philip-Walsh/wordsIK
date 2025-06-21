@@ -31,7 +31,7 @@ export class ReportGenerator {
     }
 
     private generateTextReport(result: ValidationResult): string {
-        let report = '\n' + chalk.blue.bold('📊 Validation Report\n\n');
+        let report = `\n${chalk.blue.bold('📊 Validation Report\n\n')}`;
 
         if (result.success) {
             report += chalk.green('✅ All validations passed!\n\n');
@@ -111,7 +111,7 @@ export class ReportGenerator {
     }
 
     private generateTextStatusReport(result: ValidationResult): string {
-        let report = '\n' + chalk.blue.bold('🌍 Language Status Report\n\n');
+        let report = `\n${chalk.blue.bold('🌍 Language Status Report\n\n')}`;
 
         if (result.summary?.languages) {
             for (const lang of result.summary.languages) {

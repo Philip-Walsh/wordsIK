@@ -1,10 +1,10 @@
-import { SupportedLanguage } from '../types';
+import { SupportedLanguage } from '../types/index.js';
 
 export class LanguageUtils {
     private static readonly supportedLanguages: SupportedLanguage[] = ['en', 'es', 'fr', 'ar', 'ko'];
     private static readonly languagePatterns: Record<SupportedLanguage, RegExp> = {
         'en': /^[a-zA-Z\s\-'.,!?]+$/,
-        'es': /^[a-zA-ZáéíóúñüÁÉÍÓÚÑÜ\s\-'.,!?]+$/,
+        'es': /^[a-zA-ZáéíóúñüÁÉÍÓÚÑÜ¿¡\s\-'.,!?]+$/,
         'fr': /^[a-zA-ZàâäéèêëïîôöùûüÿçÀÂÄÉÈÊËÏÎÔÖÙÛÜŸÇ\s\-'.,!?]+$/,
         'ar': /^[\u0600-\u06FF\s\-'.,!?]+$/, // Arabic Unicode range
         'ko': /^[\uAC00-\uD7AF\s\-'.,!?]+$/ // Korean Unicode range
@@ -21,6 +21,11 @@ export class LanguageUtils {
     }
 
     public static validateCharacters(text: string, language: SupportedLanguage): boolean {
+        // Empty strings are always valid
+        if (text === '') {
+            return true;
+        }
+
         const pattern = this.languagePatterns[language];
         return pattern.test(text);
     }

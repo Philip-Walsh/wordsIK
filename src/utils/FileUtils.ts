@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
+import { execSync } from 'child_process';
+import { logger } from './Logger.js';
 
 export class FileUtils {
     public static fileExists(filePath: string): boolean {
@@ -52,7 +54,7 @@ export class FileUtils {
         try {
             if (!fs.existsSync(dirPath)) return [];
             return fs.readdirSync(dirPath).filter(file => file.endsWith('.json'));
-        } catch (error) {
+        } catch {
             return [];
         }
     }
@@ -68,11 +70,10 @@ export class FileUtils {
 
     public static getChangedFiles(baseBranch: string = 'main'): string[] {
         try {
-            const { execSync } = require('child_process');
             const output = execSync(`git diff --name-only origin/${baseBranch}...HEAD`, { encoding: 'utf8' });
-            return output.split('\n').filter(line => line.trim() && line.endsWith('.json'));
-        } catch (error) {
-            console.warn('Could not determine changed files, falling back to all files');
+            return output.split('\n').filter((line: string) => line.trim() && line.endsWith('.json'));
+        } catch {
+            logger.warn('Could not determine changed files, falling back to all files', 'FileUtils');
             return [];
         }
     }

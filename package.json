@@ -1,6 +1,7 @@
 {
   "name": "words-i-know",
   "version": "1.0.0",
+  "type": "module",
   "description": "Educational vocabulary repository with content validation",
   "main": "dist/index.js",
   "bin": {
@@ -8,20 +9,21 @@
   },
   "scripts": {
     "build": "tsc",
+    "build:staged": "tsc",
     "dev": "tsc --watch",
-    "start": "node dist/cli.js",
+    "start": "npm run build && node dist/cli.js",
     "validate": "npm run build && node dist/cli.js validate",
     "validate-all": "npm run build && node dist/cli.js validate --all",
     "validate-json": "npm run build && node dist/cli.js validate --json",
     "validate-content": "npm run build && node dist/cli.js validate --content",
     "validate-translations": "npm run build && node dist/cli.js validate --translations",
     "validate-languages": "npm run build && node dist/cli.js validate --languages",
-    "validate-debug": "npm run build && node dist/cli.js validate --all --debug --log-file logs/debug.log",
-    "validate-verbose": "npm run build && node dist/cli.js validate --all --verbose --log-file logs/verbose.log",
-    "validate-ci": "npm run build && node dist/cli.js validate --all --no-colors --log-file logs/ci-validation.log",
+    "validate-ci": "npm run build && node dist/cli.js validate --all --no-colors",
     "status": "npm run build && node dist/cli.js status",
-    "status-verbose": "npm run build && node dist/cli.js status --verbose --log-file logs/status.log",
+    "status-verbose": "npm run build && node dist/cli.js status --verbose",
     "template": "npm run build && node dist/cli.js template",
+    "check-quality": "npm run build && node dist/cli.js validate --content",
+    "check-quality-verbose": "npm run build && node dist/cli.js validate --content --verbose",
     "spell-check": "npx cspell \"data/**/*.json\" \"docs/**/*.md\" \"*.md\"",
     "lint": "vale docs/ *.md CONTRIBUTING.md",
     "lint:ts": "eslint src/**/*.ts",
@@ -67,10 +69,11 @@
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
-      "npm run build"
+      "./scripts/build-ignore-args.sh"
     ],
     "*.json": [
-      "npm run build && node dist/cli.js validate --content --log-file logs/lint-staged.log"
+      "./scripts/build-ignore-args.sh",
+      "node dist/cli.js validate --content --log-file logs/lint-staged.log"
     ],
     "*.md": [
       "npx cspell"
@@ -97,7 +100,6 @@
   ],
   "author": "Your Name",
   "license": "MIT",
-  "type": "module",
   "files": [
     "dist/**/*",
     "docs/**/*",
@@ -120,25 +122,6 @@
       "pre-commit": "lint-staged",
       "pre-push": "npm run validate-all"
     }
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/*.d.ts",
-      "!src/cli.ts"
-    ],
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "text",
-      "lcov",
-      "html"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.ts",
-      "**/?(*.)+(spec|test).ts"
-    ]
   },
   "eslintConfig": {
     "extends": [
@@ -176,7 +159,10 @@
       "chalk",
       "boxen",
       "ora",
-      "glob"
+      "glob",
+      "gato",
+      "rojo",
+      "azul"
     ],
     "ignorePaths": [
       "node_modules/**",

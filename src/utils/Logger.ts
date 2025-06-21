@@ -1,5 +1,6 @@
-import chalk from 'chalk';
 import { createWriteStream, WriteStream } from 'fs';
+import chalk from 'chalk';
+import { LogData } from '../types/index.js';
 
 export enum LogLevel {
     ERROR = 0,
@@ -23,7 +24,7 @@ export interface LogEntry {
     level: LogLevel;
     message: string;
     context?: string;
-    data?: any;
+    data?: LogData;
 }
 
 export class Logger {
@@ -32,16 +33,16 @@ export class Logger {
     private colors: boolean;
     private logFile?: string;
     private quiet: boolean;
-    private verbose: boolean;
+    private isVerbose: boolean;
     private logStream?: WriteStream;
 
     constructor(options: LogOptions = {}) {
-        this.level = options.level ?? LogLevel.INFO;
-        this.timestamp = options.timestamp ?? true;
-        this.colors = options.colors ?? true;
+        this.level = options.level || LogLevel.INFO;
+        this.timestamp = options.timestamp !== false;
+        this.colors = options.colors !== false;
         this.logFile = options.logFile;
-        this.quiet = options.quiet ?? false;
-        this.verbose = options.verbose ?? false;
+        this.quiet = options.quiet || false;
+        this.isVerbose = options.verbose || false;
 
         if (this.logFile) {
             this.initializeLogFile();
@@ -71,7 +72,7 @@ export class Logger {
         }
     }
 
-    private getLevelColor(level: LogLevel): chalk.ChalkFunction {
+    private getLevelColor(level: LogLevel): (text: string) => string {
         switch (level) {
             case LogLevel.ERROR: return chalk.red;
             case LogLevel.WARN: return chalk.yellow;
@@ -120,11 +121,11 @@ export class Logger {
                 data: entry.data
             };
 
-            this.logStream.write(JSON.stringify(logEntry) + '\n');
+            this.logStream.write(`${JSON.stringify(logEntry)}\n`);
         }
     }
 
-    private log(level: LogLevel, message: string, context?: string, data?: any): void {
+    private log(level: LogLevel, message: string, context?: string, data?: LogData): void {
         if (level > this.level || this.quiet) {
             return;
         }
@@ -150,29 +151,29 @@ export class Logger {
         this.writeToFile(entry);
 
         // Log additional data if provided and verbose mode is enabled
-        if (data && this.verbose) {
+        if (data && this.isVerbose) {
             const dataStr = typeof data === 'object' ? JSON.stringify(data, null, 2) : String(data);
             console.log(chalk.gray(dataStr));
         }
     }
 
-    public error(message: string, context?: string, data?: any): void {
+    public error(message: string, context?: string, data?: LogData): void {
         this.log(LogLevel.ERROR, message, context, data);
     }
 
-    public warn(message: string, context?: string, data?: any): void {
+    public warn(message: string, context?: string, data?: LogData): void {
         this.log(LogLevel.WARN, message, context, data);
     }
 
-    public info(message: string, context?: string, data?: any): void {
+    public info(message: string, context?: string, data?: LogData): void {
         this.log(LogLevel.INFO, message, context, data);
     }
 
-    public debug(message: string, context?: string, data?: any): void {
+    public debug(message: string, context?: string, data?: LogData): void {
         this.log(LogLevel.DEBUG, message, context, data);
     }
 
-    public verbose(message: string, context?: string, data?: any): void {
+    public verbose(message: string, context?: string, data?: LogData): void {
         this.log(LogLevel.VERBOSE, message, context, data);
     }
 
@@ -261,9 +262,9 @@ export class Logger {
     }
 
     public setVerbose(verbose: boolean): void {
-        this.verbose = verbose;
+        this.isVerbose = verbose;
     }
 }
 
 // Global logger instance
-export const logger = new Logger(); 
+export const logger = new Logger();

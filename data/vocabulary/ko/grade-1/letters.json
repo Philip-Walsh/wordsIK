@@ -16,121 +16,145 @@
         "words": [
             {
                 "word": "ㄱ",
+                "translation": "giyeok",
                 "definition": "기역 (giyeok) - first consonant",
                 "example": "가방 (bag)"
             },
             {
                 "word": "ㄴ",
+                "translation": "nieun",
                 "definition": "니은 (nieun) - second consonant",
                 "example": "나무 (tree)"
             },
             {
                 "word": "ㄷ",
+                "translation": "digeut",
                 "definition": "디귿 (digeut) - third consonant",
                 "example": "다리 (bridge)"
             },
             {
                 "word": "ㄹ",
+                "translation": "rieul",
                 "definition": "리을 (rieul) - fourth consonant",
                 "example": "라면 (ramen)"
             },
             {
                 "word": "ㅁ",
+                "translation": "mieum",
                 "definition": "미음 (mieum) - fifth consonant",
                 "example": "마음 (heart)"
             },
             {
                 "word": "ㅂ",
+                "translation": "bieup",
                 "definition": "비읍 (bieup) - sixth consonant",
                 "example": "바다 (sea)"
             },
             {
                 "word": "ㅅ",
+                "translation": "siot",
                 "definition": "시옷 (siot) - seventh consonant",
                 "example": "사과 (apple)"
             },
             {
                 "word": "ㅇ",
+                "translation": "ieung",
                 "definition": "이응 (ieung) - eighth consonant",
                 "example": "아기 (baby)"
             },
             {
                 "word": "ㅈ",
+                "translation": "jieut",
                 "definition": "지읒 (jieut) - ninth consonant",
                 "example": "자전거 (bicycle)"
             },
             {
                 "word": "ㅊ",
+                "translation": "chieut",
                 "definition": "치읓 (chieut) - tenth consonant",
                 "example": "차 (car)"
             },
             {
                 "word": "ㅋ",
+                "translation": "kieuk",
                 "definition": "키읔 (kieuk) - eleventh consonant",
                 "example": "코 (nose)"
             },
             {
                 "word": "ㅌ",
+                "translation": "tieut",
                 "definition": "티읕 (tieut) - twelfth consonant",
                 "example": "토끼 (rabbit)"
             },
             {
                 "word": "ㅍ",
+                "translation": "pieup",
                 "definition": "피읖 (pieup) - thirteenth consonant",
                 "example": "파도 (wave)"
             },
             {
                 "word": "ㅎ",
+                "translation": "hieut",
                 "definition": "히읗 (hieut) - fourteenth consonant",
                 "example": "하늘 (sky)"
             },
             {
                 "word": "ㅏ",
+                "translation": "a",
                 "definition": "아 (a) - first vowel",
                 "example": "사과 (apple)"
             },
             {
                 "word": "ㅑ",
+                "translation": "ya",
                 "definition": "야 (ya) - second vowel",
                 "example": "야구 (baseball)"
             },
             {
                 "word": "ㅓ",
+                "translation": "eo",
                 "definition": "어 (eo) - third vowel",
                 "example": "어머니 (mother)"
             },
             {
                 "word": "ㅕ",
+                "translation": "yeo",
                 "definition": "여 (yeo) - fourth vowel",
                 "example": "여우 (fox)"
             },
             {
                 "word": "ㅗ",
+                "translation": "o",
                 "definition": "오 (o) - fifth vowel",
                 "example": "오리 (duck)"
             },
             {
                 "word": "ㅛ",
+                "translation": "yo",
                 "definition": "요 (yo) - sixth vowel",
                 "example": "요리 (cooking)"
             },
             {
                 "word": "ㅜ",
+                "translation": "u",
                 "definition": "우 (u) - seventh vowel",
                 "example": "우유 (milk)"
             },
             {
                 "word": "ㅠ",
+                "translation": "yu",
                 "definition": "유 (yu) - eighth vowel",
                 "example": "유리 (glass)"
             },
             {
                 "word": "ㅡ",
+                "translation": "eu",
                 "definition": "으 (eu) - ninth vowel",
                 "example": "으깨다 (to mash)"
             },
             {
                 "word": "ㅣ",
+                "translation": "i",
                 "definition": "이 (i) - tenth vowel",
                 "example": "이름 (name)"
             }

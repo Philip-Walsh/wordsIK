@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
+    "module": "ES2022",
     "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
@@ -17,8 +17,15 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node"]
+    "allowJs": true,
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/__tests__/**",
+    "**/__mocks__/**"
+  ]
 }

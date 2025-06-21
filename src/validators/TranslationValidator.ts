@@ -1,175 +1,186 @@
-import { BaseValidator } from './BaseValidator';
-import { TranslationComparison, TranslationError, VocabularyData, SupportedLanguage } from '../types';
-import { FileUtils } from '../utils/FileUtils';
-import { LanguageUtils } from '../utils/LanguageUtils';
-import chalk from 'chalk';
+import { BaseValidator } from './BaseValidator.js';
+import { TranslationComparison, ValidationData, WordData } from '../types/index.js';
+import { FileUtils } from '../utils/FileUtils.js';
 
 export class TranslationValidator extends BaseValidator {
-    private readonly baseLanguage: SupportedLanguage = 'en';
-    private readonly supportedLanguages: SupportedLanguage[] = ['en', 'es', 'fr', 'ar', 'ko'];
+    private comparisons: TranslationComparison[] = [];
 
     constructor(verbose: boolean = false) {
         super(verbose);
     }
 
     public validateChanges(changedFiles: string[]): TranslationComparison[] {
-        this.log('🔍 Starting translation validation...');
-
-        if (changedFiles.length === 0) {
-            this.log('No files changed, skipping translation validation');
-            return [];
-        }
-
-        const comparisons: TranslationComparison[] = [];
-        const fileGroups = this.groupFilesByLanguage(changedFiles);
-
-        for (const [language, files] of Object.entries(fileGroups)) {
-            if (language === this.baseLanguage) continue;
-
-            this.log(`📝 Validating translations for ${language}...`);
-
-            for (const file of files) {
-                const comparison = this.validateFileTranslations(file, language as SupportedLanguage);
-                if (comparison) {
-                    comparisons.push(comparison);
-                }
-            }
-        }
-
-        return comparisons;
-    }
-
-    private groupFilesByLanguage(changedFiles: string[]): Record<string, string[]> {
-        const groups: Record<string, string[]> = {};
+        this.log('🔄 Validating translation changes...');
 
         for (const file of changedFiles) {
-            const language = LanguageUtils.extractLanguageFromPath(file);
-            if (language && this.supportedLanguages.includes(language as SupportedLanguage)) {
-                if (!groups[language]) groups[language] = [];
-                groups[language].push(file);
+            if (this.isTranslationFile(file)) {
+                this.validateTranslationFile(file);
             }
         }
 
-        return groups;
+        return this.comparisons;
     }
 
-    private validateFileTranslations(file: string, language: SupportedLanguage): TranslationComparison | null {
-        const englishFile = this.findCorrespondingEnglishFile(file);
-        if (!englishFile) {
-            this.addWarning(`No corresponding English file found for ${file}`);
+    private isTranslationFile(filePath: string): boolean {
+        return filePath.includes('/vocabulary/') && !filePath.includes('/en/');
+    }
+
+    private validateTranslationFile(filePath: string): void {
+        try {
+            const data: ValidationData = FileUtils.readJsonFile(filePath);
+
+            // Find corresponding English file
+            const englishFile = this.findEnglishFile(filePath);
+            if (englishFile && FileUtils.fileExists(englishFile)) {
+                this.compareWithEnglish(filePath, englishFile, data);
+            } else {
+                this.addWarning(`No corresponding English file found for ${filePath}`);
+            }
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.addError(`Failed to parse translation file: ${errorMessage}`, filePath);
+        }
+    }
+
+    private findEnglishFile(filePath: string): string | null {
+        // Extract language and path structure
+        const pathParts = filePath.split('/');
+        const languageIndex = pathParts.findIndex(part => ['es', 'fr', 'ar', 'ko'].includes(part));
+
+        if (languageIndex === -1) {
             return null;
         }
 
+        // Replace language with 'en'
+        pathParts[languageIndex] = 'en';
+        return pathParts.join('/');
+    }
+
+    private compareWithEnglish(translationFile: string, englishFile: string, translationData: ValidationData): void {
         try {
-            const englishData = FileUtils.readJsonFile<VocabularyData>(englishFile);
-            const targetData = FileUtils.readJsonFile<VocabularyData>(file);
+            const englishData: ValidationData = FileUtils.readJsonFile(englishFile);
 
             const comparison: TranslationComparison = {
                 englishFile,
-                targetFile: file,
-                language,
+                targetFile: translationFile,
+                language: this.extractLanguage(translationFile),
                 missingWords: [],
                 extraWords: [],
                 translationErrors: []
             };
 
-            this.compareVocabularyWords(englishData, targetData, comparison);
+            this.validateTranslationAccuracy(englishData, translationData, comparison);
+            this.comparisons.push(comparison);
 
-            return comparison;
         } catch (error) {
-            this.addError(`Error comparing translations in ${file}: ${error instanceof Error ? error.message : 'Unknown error'}`);
-            return null;
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.addError(`Failed to compare with English file: ${errorMessage}`, translationFile);
         }
     }
 
-    private findCorrespondingEnglishFile(nonEnglishFile: string): string | null {
-        const pathParts = nonEnglishFile.split('/');
-        const languageIndex = pathParts.findIndex(part => this.supportedLanguages.includes(part as SupportedLanguage));
+    private validateTranslationAccuracy(englishData: any, translationData: any, comparison: TranslationComparison): void {
+        // Handle both flat structure (ValidationData) and nested structure (VocabularyData)
+        let englishWords: WordData[] = [];
+        let translationWords: WordData[] = [];
 
-        if (languageIndex === -1) return null;
+        if (englishData.words && Array.isArray(englishData.words)) {
+            englishWords = englishData.words;
+        } else if (englishData.vocabulary && englishData.vocabulary.words && Array.isArray(englishData.vocabulary.words)) {
+            englishWords = englishData.vocabulary.words;
+        }
 
-        pathParts[languageIndex] = this.baseLanguage;
-        const englishFile = pathParts.join('/');
+        if (translationData.words && Array.isArray(translationData.words)) {
+            translationWords = translationData.words;
+        } else if (translationData.vocabulary && translationData.vocabulary.words && Array.isArray(translationData.vocabulary.words)) {
+            translationWords = translationData.vocabulary.words;
+        }
 
-        return FileUtils.fileExists(englishFile) ? englishFile : null;
+        const englishWordsMap = new Map<string, WordData>();
+        const translationWordsMap = new Map<string, WordData>();
+
+        // Build maps for comparison
+        englishWords.forEach((word: WordData) => {
+            englishWordsMap.set(word.word.toLowerCase(), word);
+        });
+
+        translationWords.forEach((word: WordData) => {
+            translationWordsMap.set(word.word.toLowerCase(), word);
+        });
+
+        // Check for missing words in translation
+        for (const [englishWord, englishWordData] of englishWordsMap) {
+            if (!translationWordsMap.has(englishWord)) {
+                comparison.missingWords.push(englishWord);
+                comparison.translationErrors.push({
+                    word: englishWord,
+                    type: 'missing_translation',
+                    message: `Word "${englishWord}" is missing in translation`
+                });
+            } else {
+                const translationWord = translationWordsMap.get(englishWord)!;
+                this.validateWordAccuracy(translationWord, englishWordData, comparison);
+            }
+        }
+
+        // Check for extra words in translation
+        for (const [translationWord] of translationWordsMap) {
+            if (!englishWordsMap.has(translationWord)) {
+                comparison.extraWords.push(translationWord);
+            }
+        }
     }
 
-    private compareVocabularyWords(englishData: VocabularyData, targetData: VocabularyData, comparison: TranslationComparison): void {
-        const englishWords = englishData.vocabulary?.words || [];
-        const targetWords = targetData.vocabulary?.words || [];
-
-        const englishWordMap = new Map(englishWords.map(word => [word.word, word]));
-        const targetWordMap = new Map(targetWords.map(word => [word.word, word]));
-
-        for (const englishWord of englishWords) {
-            if (!targetWordMap.has(englishWord.word)) {
-                comparison.missingWords.push(englishWord.word);
-                this.addError(`Missing translation for word "${englishWord.word}" in ${comparison.targetFile}`);
-            }
-        }
-
-        for (const targetWord of targetWords) {
-            if (!englishWordMap.has(targetWord.word)) {
-                comparison.extraWords.push(targetWord.word);
-                this.addWarning(`Extra word "${targetWord.word}" in ${comparison.targetFile} not found in English version`);
-            }
-        }
-
-        for (const targetWord of targetWords) {
-            const englishWord = englishWordMap.get(targetWord.word);
-            if (englishWord) {
-                this.validateTranslationAccuracy(targetWord, englishWord, comparison);
-            }
-        }
-    }
-
-    private validateTranslationAccuracy(targetWord: any, englishWord: any, comparison: TranslationComparison): void {
+    private validateWordAccuracy(targetWord: WordData, englishWord: WordData, comparison: TranslationComparison): void {
+        // Check if translation is empty
         if (!targetWord.translation || targetWord.translation.trim() === '') {
             comparison.translationErrors.push({
                 word: targetWord.word,
-                type: 'missing_translation',
-                message: 'Missing translation'
+                type: 'empty_translation',
+                message: `Translation is empty for word "${targetWord.word}"`
             });
-            this.addError(`Missing translation for word "${targetWord.word}" in ${comparison.targetFile}`);
-            return;
         }
 
-        const translation = targetWord.translation.toLowerCase().trim();
-        const englishWordLower = englishWord.word.toLowerCase().trim();
-
-        if (translation === englishWordLower) {
+        // Check if translation is same as English
+        if (targetWord.translation === englishWord.word) {
             comparison.translationErrors.push({
                 word: targetWord.word,
                 type: 'same_as_english',
-                message: 'Translation appears to be the same as English word'
+                message: `Translation is same as English word "${targetWord.word}"`
             });
-            this.addWarning(`Translation "${translation}" for word "${targetWord.word}" in ${comparison.targetFile} appears to be the same as English word`);
         }
 
-        const requiredFields = ['definition', 'example'] as const;
-        for (const field of requiredFields) {
-            if (!targetWord[field] || targetWord[field].trim() === '') {
-                comparison.translationErrors.push({
-                    word: targetWord.word,
-                    type: field === 'definition' ? 'missing_definition' : 'missing_example',
-                    message: `Missing ${field}`
-                });
-                this.addError(`Missing ${field} for word "${targetWord.word}" in ${comparison.targetFile}`);
-            }
+        // Check if definition is missing
+        if (!targetWord.definition || targetWord.definition.trim() === '') {
+            comparison.translationErrors.push({
+                word: targetWord.word,
+                type: 'missing_definition',
+                message: `Definition is missing for word "${targetWord.word}"`
+            });
         }
 
-        if (targetWord.difficulty && englishWord.difficulty) {
-            if (targetWord.difficulty !== englishWord.difficulty) {
-                this.addWarning(`Difficulty level mismatch for word "${targetWord.word}" in ${comparison.targetFile}: ${targetWord.difficulty} vs ${englishWord.difficulty}`);
-            }
+        // Check if example is missing
+        if (!targetWord.example || targetWord.example.trim() === '') {
+            comparison.translationErrors.push({
+                word: targetWord.word,
+                type: 'missing_example',
+                message: `Example is missing for word "${targetWord.word}"`
+            });
         }
     }
 
-    protected generateSummary(): any {
+    private extractLanguage(filePath: string): string {
+        const pathParts = filePath.split('/');
+        const languageIndex = pathParts.findIndex(part => ['es', 'fr', 'ar', 'ko'].includes(part));
+        return languageIndex !== -1 ? pathParts[languageIndex] : 'unknown';
+    }
+
+    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
         return {
-            totalComparisons: this.errors.length + this.warnings.length,
+            totalFiles: this.errors.length + this.warnings.length,
+            totalWords: 0,
             errors: this.errors.length,
-            warnings: this.warnings.length
+            warnings: this.warnings.length,
+            languages: []
         };
     }
 } 

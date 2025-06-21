@@ -16,136 +16,163 @@
         "words": [
             {
                 "word": "A",
+                "translation": "A",
                 "definition": "Primera letra del alfabeto",
                 "example": "A es para árbol."
             },
             {
                 "word": "B",
+                "translation": "B",
                 "definition": "Segunda letra del alfabeto",
                 "example": "B es para barco."
             },
             {
                 "word": "C",
+                "translation": "C",
                 "definition": "Tercera letra del alfabeto",
                 "example": "C es para casa."
             },
             {
                 "word": "D",
+                "translation": "D",
                 "definition": "Cuarta letra del alfabeto",
                 "example": "D es para dado."
             },
             {
                 "word": "E",
+                "translation": "E",
                 "definition": "Quinta letra del alfabeto",
                 "example": "E es para elefante."
             },
             {
                 "word": "F",
+                "translation": "F",
                 "definition": "Sexta letra del alfabeto",
                 "example": "F es para foca."
             },
             {
                 "word": "G",
+                "translation": "G",
                 "definition": "Séptima letra del alfabeto",
                 "example": "G es para gato."
             },
             {
                 "word": "H",
+                "translation": "H",
                 "definition": "Octava letra del alfabeto",
                 "example": "H es para helado."
             },
             {
                 "word": "I",
+                "translation": "I",
                 "definition": "Novena letra del alfabeto",
                 "example": "I es para iguana."
             },
             {
                 "word": "J",
+                "translation": "J",
                 "definition": "Décima letra del alfabeto",
                 "example": "J es para jirafa."
             },
             {
                 "word": "K",
+                "translation": "K",
                 "definition": "Undécima letra del alfabeto",
                 "example": "K es para koala."
             },
             {
                 "word": "L",
+                "translation": "L",
                 "definition": "Duodécima letra del alfabeto",
                 "example": "L es para león."
             },
             {
                 "word": "M",
+                "translation": "M",
                 "definition": "Decimotercera letra del alfabeto",
                 "example": "M es para mano."
             },
             {
                 "word": "N",
+                "translation": "N",
                 "definition": "Decimocuarta letra del alfabeto",
                 "example": "N es para nube."
             },
             {
                 "word": "Ñ",
+                "translation": "Ñ",
                 "definition": "Letra especial del alfabeto español",
                 "example": "Ñ es para ñu."
             },
             {
                 "word": "O",
+                "translation": "O",
                 "definition": "Decimoquinta letra del alfabeto",
                 "example": "O es para oso."
             },
             {
                 "word": "P",
+                "translation": "P",
                 "definition": "Decimosexta letra del alfabeto",
                 "example": "P es para pato."
             },
             {
                 "word": "Q",
+                "translation": "Q",
                 "definition": "Decimoséptima letra del alfabeto",
                 "example": "Q es para queso."
             },
             {
                 "word": "R",
+                "translation": "R",
                 "definition": "Decimoctava letra del alfabeto",
                 "example": "R es para ratón."
             },
             {
                 "word": "S",
+                "translation": "S",
                 "definition": "Decimonovena letra del alfabeto",
                 "example": "S es para sol."
             },
             {
                 "word": "T",
+                "translation": "T",
                 "definition": "Vigésima letra del alfabeto",
                 "example": "T es para tigre."
             },
             {
                 "word": "U",
+                "translation": "U",
                 "definition": "Vigésima primera letra del alfabeto",
                 "example": "U es para uva."
             },
             {
                 "word": "V",
+                "translation": "V",
                 "definition": "Vigésima segunda letra del alfabeto",
                 "example": "V es para vaca."
             },
             {
                 "word": "W",
+                "translation": "W",
                 "definition": "Vigésima tercera letra del alfabeto",
                 "example": "W es para wafle."
             },
             {
                 "word": "X",
+                "translation": "X",
                 "definition": "Vigésima cuarta letra del alfabeto",
                 "example": "X es para xilófono."
             },
             {
                 "word": "Y",
+                "translation": "Y",
                 "definition": "Vigésima quinta letra del alfabeto",
                 "example": "Y es para yate."
             },
             {
                 "word": "Z",
+                "translation": "Z",
                 "definition": "Vigésima sexta letra del alfabeto",
                 "example": "Z es para zapato."
             }

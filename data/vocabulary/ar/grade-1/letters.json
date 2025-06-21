@@ -16,141 +16,169 @@
         "words": [
             {
                 "word": "ا",
+                "translation": "alif",
                 "definition": "أول حرف في الأبجدية",
                 "example": "ا مثل أسد"
             },
             {
                 "word": "ب",
+                "translation": "baa",
                 "definition": "ثاني حرف في الأبجدية",
                 "example": "ب مثل باب"
             },
             {
                 "word": "ت",
+                "translation": "taa",
                 "definition": "ثالث حرف في الأبجدية",
                 "example": "ت مثل تفاح"
             },
             {
                 "word": "ث",
+                "translation": "thaa",
                 "definition": "رابع حرف في الأبجدية",
                 "example": "ث مثل ثعلب"
             },
             {
                 "word": "ج",
+                "translation": "jeem",
                 "definition": "خامس حرف في الأبجدية",
                 "example": "ج مثل جمل"
             },
             {
                 "word": "ح",
+                "translation": "haa",
                 "definition": "سادس حرف في الأبجدية",
                 "example": "ح مثل حصان"
             },
             {
                 "word": "خ",
+                "translation": "khaa",
                 "definition": "سابع حرف في الأبجدية",
                 "example": "خ مثل خبز"
             },
             {
                 "word": "د",
+                "translation": "dal",
                 "definition": "ثامن حرف في الأبجدية",
                 "example": "د مثل دب"
             },
             {
                 "word": "ذ",
+                "translation": "thal",
                 "definition": "تاسع حرف في الأبجدية",
                 "example": "ذ مثل ذهب"
             },
             {
                 "word": "ر",
+                "translation": "raa",
                 "definition": "عاشر حرف في الأبجدية",
                 "example": "ر مثل رجل"
             },
             {
                 "word": "ز",
+                "translation": "zay",
                 "definition": "الحرف الحادي عشر في الأبجدية",
                 "example": "ز مثل زرافة"
             },
             {
                 "word": "س",
+                "translation": "seen",
                 "definition": "الحرف الثاني عشر في الأبجدية",
                 "example": "س مثل سمكة"
             },
             {
                 "word": "ش",
+                "translation": "sheen",
                 "definition": "الحرف الثالث عشر في الأبجدية",
                 "example": "ش مثل شمس"
             },
             {
                 "word": "ص",
+                "translation": "saad",
                 "definition": "الحرف الرابع عشر في الأبجدية",
                 "example": "ص مثل صقر"
             },
             {
                 "word": "ض",
+                "translation": "daad",
                 "definition": "الحرف الخامس عشر في الأبجدية",
                 "example": "ض مثل ضفدع"
             },
             {
                 "word": "ط",
+                "translation": "taa",
                 "definition": "الحرف السادس عشر في الأبجدية",
                 "example": "ط مثل طائر"
             },
             {
                 "word": "ظ",
+                "translation": "thaa",
                 "definition": "الحرف السابع عشر في الأبجدية",
                 "example": "ظ مثل ظرف"
             },
             {
                 "word": "ع",
+                "translation": "ayn",
                 "definition": "الحرف الثامن عشر في الأبجدية",
                 "example": "ع مثل عنب"
             },
             {
                 "word": "غ",
+                "translation": "ghayn",
                 "definition": "الحرف التاسع عشر في الأبجدية",
                 "example": "غ مثل غزال"
             },
             {
                 "word": "ف",
+                "translation": "faa",
                 "definition": "الحرف العشرون في الأبجدية",
                 "example": "ف مثل فهد"
             },
             {
                 "word": "ق",
+                "translation": "qaaf",
                 "definition": "الحرف الحادي والعشرون في الأبجدية",
                 "example": "ق مثل قمر"
             },
             {
                 "word": "ك",
+                "translation": "kaaf",
                 "definition": "الحرف الثاني والعشرون في الأبجدية",
                 "example": "ك مثل كتاب"
             },
             {
                 "word": "ل",
+                "translation": "laam",
                 "definition": "الحرف الثالث والعشرون في الأبجدية",
                 "example": "ل مثل ليمون"
             },
             {
                 "word": "م",
+                "translation": "meem",
                 "definition": "الحرف الرابع والعشرون في الأبجدية",
                 "example": "م مثل موز"
             },
             {
                 "word": "ن",
+                "translation": "noon",
                 "definition": "الحرف الخامس والعشرون في الأبجدية",
                 "example": "ن مثل نمر"
             },
             {
                 "word": "ه",
+                "translation": "haa",
                 "definition": "الحرف السادس والعشرون في الأبجدية",
                 "example": "ه مثل هدهد"
             },
             {
                 "word": "و",
+                "translation": "waaw",
                 "definition": "الحرف السابع والعشرون في الأبجدية",
                 "example": "و مثل وردة"
             },
             {
                 "word": "ي",
+                "translation": "yaa",
                 "definition": "الحرف الثامن والعشرون في الأبجدية",
                 "example": "ي مثل يد"
             }

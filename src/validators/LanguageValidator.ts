@@ -1,7 +1,7 @@
-import { BaseValidator } from './BaseValidator';
-import { SupportedLanguage, ContentType, GradeLevel } from '../types';
-import { FileUtils } from '../utils/FileUtils';
-import { LanguageUtils } from '../utils/LanguageUtils';
+import { BaseValidator } from './BaseValidator.js';
+import { SupportedLanguage, ContentType, ValidationData, WordData, GradeLevel } from '../types/index.js';
+import { FileUtils } from '../utils/FileUtils.js';
+import { LanguageUtils } from '../utils/LanguageUtils.js';
 
 export class LanguageValidator extends BaseValidator {
     private readonly supportedLanguages: SupportedLanguage[] = ['en', 'es', 'fr', 'ar', 'ko'];
@@ -68,44 +68,52 @@ export class LanguageValidator extends BaseValidator {
         }
 
         for (const file of files) {
-            const filePath = `${gradePath}/${file}`;
-            this.validateFile(filePath, language);
+            this.validateLanguageFile(file, language);
         }
     }
 
-    private validateFile(filePath: string, language: SupportedLanguage): void {
+    private validateLanguageFile(filePath: string, language: SupportedLanguage): void {
         try {
-            const content = FileUtils.readFile(filePath);
-
-            if (!FileUtils.isValidUTF8(content)) {
-                this.addError(`Invalid UTF-8 encoding in ${filePath}`);
-            }
-
-            const jsonData = FileUtils.readJsonFile(filePath);
-            this.validateLanguageSpecificContent(jsonData, filePath, language);
+            const data: ValidationData = FileUtils.readJsonFile(filePath);
+            this.validateLanguageSpecificContent(data, filePath, language);
         } catch (error) {
-            this.addError(`Error reading file ${filePath}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.addError(`Failed to parse language file: ${errorMessage}`, filePath);
         }
     }
 
     private validateLanguageSpecificContent(data: any, filePath: string, language: SupportedLanguage): void {
-        if (!data.vocabulary || !Array.isArray(data.vocabulary.words)) {
+        // Handle both flat structure (ValidationData) and nested structure (VocabularyData)
+        let words: WordData[] = [];
+
+        if (data.words && Array.isArray(data.words)) {
+            // Flat structure: data.words
+            words = data.words;
+        } else if (data.vocabulary && data.vocabulary.words && Array.isArray(data.vocabulary.words)) {
+            // Nested structure: data.vocabulary.words
+            words = data.vocabulary.words;
+        } else {
+            this.addError('Missing or invalid words array', filePath);
             return;
         }
 
-        data.vocabulary.words.forEach((word: any, index: number) => {
-            if (!word.translation) {
-                this.addWarning(`Missing translation in ${filePath} word ${index}`);
-                return;
-            }
-
-            this.validateCharacters(word.translation, language, filePath, index);
+        words.forEach((word: WordData, index: number) => {
+            this.validateWordLanguage(word, filePath, language, index);
         });
+    }
+
+    private validateWordLanguage(word: WordData, filePath: string, language: SupportedLanguage, index: number): void {
+        if (!word.translation) {
+            this.addWarning(`Missing translation in ${filePath} word ${index + 1}`);
+            return;
+        }
+
+        this.validateCharacters(word.translation, language, filePath, index);
     }
 
     private validateCharacters(text: string, language: SupportedLanguage, filePath: string, index: number): void {
         if (!LanguageUtils.validateCharacters(text, language)) {
-            this.addWarning(`Non-${language} characters in translation "${text}" in ${filePath} word ${index}`);
+            this.addWarning(`Non-${language} characters in translation "${text}" in ${filePath} word ${index + 1}`);
         }
     }
 
@@ -114,11 +122,13 @@ export class LanguageValidator extends BaseValidator {
         // Implementation for cross-language consistency check
     }
 
-    protected generateSummary(): any {
+    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
         return {
             totalFiles: this.errors.length + this.warnings.length,
+            totalWords: 0,
             errors: this.errors.length,
-            warnings: this.warnings.length
+            warnings: this.warnings.length,
+            languages: this.supportedLanguages
         };
     }
 } 
