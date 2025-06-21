@@ -10,7 +10,63 @@ env:
   NODE_VERSION: "18"
 
 jobs:
-  # Secret scanning and security checks
+  # Build and validate
+  build-and-validate:
+    name: Build & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Lint TypeScript
+        run: npm run lint:ts
+
+      - name: Run tests
+        run: npm test
+
+      - name: Validate all content
+        run: npm run validate-all
+
+      - name: Validate translations (PR only)
+        if: github.event_name == 'pull_request'
+        run: npm run validate-translations
+
+      - name: Generate validation report
+        if: github.event_name == 'pull_request'
+        run: |
+          npm run validate-all -- --output markdown > validation-report.md
+          npm run validate-translations -- --output markdown >> validation-report.md
+
+      - name: Comment validation report
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('validation-report.md', 'utf8');
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+  # Security checks
   security:
     name: Security & Secrets Check
     runs-on: ubuntu-latest
@@ -29,6 +85,34 @@ jobs:
         run: |
           docker run --rm -v "$(pwd):/repo" trufflesecurity/trufflehog:latest \
             --only-verified --fail /repo
+
+  # Documentation linting
+  docs:
+    name: Documentation Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Vale
+        run: |
+          wget https://github.com/errata-ai/vale/releases/latest/download/vale_2.28.0_Linux_64-bit.tar.gz
+          tar -xzf vale_2.28.0_Linux_64-bit.tar.gz
+          sudo mv vale /usr/local/bin/
+
+      - name: Create Vale config
+        run: |
+          cat > .vale.ini << EOF
+          StylesPath = .vale/styles
+          [*.md]
+          BasedOnStyles = Microsoft, write-good, proselint
+          EOF
+
+      - name: Run Vale
+        run: vale docs/ *.md CONTRIBUTING.md
+
+      - name: Spell check
+        run: npx cspell "docs/**/*.md" "*.md"
 
   # Code quality and validation
   validation:
@@ -168,54 +252,12 @@ jobs:
             fi
           done
 
-  # Build and test
-  build:
-    name: Build & Test
-    runs-on: ubuntu-latest
-    needs: [validation, spellcheck, vale, multilingual]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run all validations
-        run: |
-          echo "Running comprehensive validation..."
-          npm run validate
-
-      - name: Check file structure
-        run: |
-          echo "Validating project structure..."
-          # Ensure required directories exist
-          [ -d "data" ] || exit 1
-          [ -d "docs" ] || exit 1
-          [ -d "validation" ] || exit 1
-          echo "✓ Project structure is valid"
-
-      - name: Generate validation report
-        run: |
-          echo "Generating validation report..."
-          echo "## Validation Summary" > validation-report.md
-          echo "- [x] JSON syntax validation" >> validation-report.md
-          echo "- [x] Profanity filtering" >> validation-report.md
-          echo "- [x] Spell checking" >> validation-report.md
-          echo "- [x] Vale linting" >> validation-report.md
-          echo "- [x] Multi-language validation" >> validation-report.md
-          echo "- [x] Security scanning" >> validation-report.md
-
   # Final status check
   status:
     name: Status Check
     runs-on: ubuntu-latest
-    needs: [security, validation, spellcheck, vale, multilingual, build]
+    needs:
+      [security, validation, spellcheck, vale, multilingual, build-and-validate]
     if: always()
     steps:
       - name: Check job status
@@ -226,7 +268,7 @@ jobs:
              [ "${{ needs.spellcheck.result }}" != "success" ] || \
              [ "${{ needs.vale.result }}" != "success" ] || \
              [ "${{ needs.multilingual.result }}" != "success" ] || \
-             [ "${{ needs.build.result }}" != "success" ]; then
+             [ "${{ needs.build-and-validate.result }}" != "success" ]; then
             echo "❌ One or more checks failed"
             exit 1
           else
