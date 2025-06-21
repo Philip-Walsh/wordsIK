@@ -3,18 +3,47 @@
   "version": "1.0.0",
   "description": "Educational vocabulary repository with content validation",
   "scripts": {
-    "validate": "node validation/profanity-check.js"
+    "validate": "node validation/profanity-check.js",
+    "validate-all": "npm run validate-json && npm run validate-content && npm run spell-check",
+    "validate-json": "find data/ -name '*.json' -exec node -e \"JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')); console.log('✓', process.argv[1])\" {} \\;",
+    "validate-content": "node validation/profanity-check.js",
+    "spell-check": "npx cspell \"data/**/*.json\" \"docs/**/*.md\" \"*.md\"",
+    "lint": "vale docs/ *.md CONTRIBUTING.md",
+    "prepare": "husky install"
   },
   "dependencies": {
     "bad-words": "^3.0.4"
   },
   "devDependencies": {
     "husky": "^8.0.3",
-    "lint-staged": "^15.2.0"
+    "lint-staged": "^15.2.0",
+    "cspell": "^8.6.0"
   },
   "lint-staged": {
     "*.json": [
-      "node validation/profanity-check.js"
+      "node validation/profanity-check.js",
+      "npx cspell"
+    ],
+    "*.md": [
+      "npx cspell"
     ]
-  }
-} 
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/wordsIK.git"
+  },
+  "keywords": [
+    "education",
+    "vocabulary",
+    "grammar",
+    "spelling",
+    "multilingual",
+    "learning"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
