@@ -4,7 +4,7 @@ A collaborative repository for educational vocabulary, grammar, and spelling res
 
 ## 🚀 Features
 
-- **Multi-language Support**: English, Spanish, French with extensible structure
+- **Multi-language Support: English, Spanish, French, Arabic, Korean with extensible structure
 - **Quality Assurance**: Automated validation, spell checking, and content filtering
 - **CI/CD Pipeline**: Comprehensive GitHub Actions workflow with security scanning
 - **Educational Focus**: Age-appropriate content organized by grade levels

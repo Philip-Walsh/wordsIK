@@ -1,0 +1,106 @@
+{
+    "metadata": {
+        "language": "en",
+        "grade": "1",
+        "week": "1",
+        "theme": "Basic Sight Words",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "Essential sight words for beginning readers",
+        "learningObjectives": [
+            "Recognize common sight words",
+            "Build reading fluency",
+            "Develop basic vocabulary"
+        ],
+        "words": [
+            {
+                "word": "the",
+                "translation": "el/la",
+                "definition": "Used to point to a specific person, place, or thing",
+                "example": "The cat is sleeping.",
+                "difficulty": "easy",
+                "category": "sight-words",
+                "phonetic": "/ðə/",
+                "syllables": [
+                    "the"
+                ]
+            },
+            {
+                "word": "and",
+                "translation": "y",
+                "definition": "Used to connect words or groups of words",
+                "example": "I like cats and dogs.",
+                "difficulty": "easy",
+                "category": "sight-words",
+                "phonetic": "/ænd/",
+                "syllables": [
+                    "and"
+                ]
+            },
+            {
+                "word": "is",
+                "translation": "es",
+                "definition": "Present tense of 'to be' for one person or thing",
+                "example": "She is happy.",
+                "difficulty": "easy",
+                "category": "sight-words",
+                "phonetic": "/ɪz/",
+                "syllables": [
+                    "is"
+                ]
+            },
+            {
+                "word": "in",
+                "translation": "en",
+                "definition": "Inside or within something",
+                "example": "The book is in the bag.",
+                "difficulty": "easy",
+                "category": "sight-words",
+                "phonetic": "/ɪn/",
+                "syllables": [
+                    "in"
+                ]
+            },
+            {
+                "word": "it",
+                "translation": "eso",
+                "definition": "Used to refer to a thing or animal",
+                "example": "It is raining.",
+                "difficulty": "easy",
+                "category": "sight-words",
+                "phonetic": "/ɪt/",
+                "syllables": [
+                    "it"
+                ]
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "flashcards",
+            "description": "Practice recognizing sight words quickly",
+            "instructions": "Show each word and have students read it aloud"
+        },
+        {
+            "type": "sentence-building",
+            "description": "Use sight words to build simple sentences",
+            "instructions": "Combine sight words with other known words to create sentences"
+        },
+        {
+            "type": "word-search",
+            "description": "Find sight words in a grid of letters",
+            "instructions": "Circle or highlight the sight words when found"
+        }
+    ],
+    "assessment": {
+        "type": "recognition",
+        "description": "Students should be able to recognize and read these words quickly",
+        "criteria": [
+            "Can read word within 3 seconds",
+            "Can use word in a simple sentence",
+            "Can identify word in context"
+        ]
+    }
+}

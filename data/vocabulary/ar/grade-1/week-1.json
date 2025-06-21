@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "language": "ar",
+    "grade": "1",
+    "week": "1",
+    "theme": "الألوان (Colors)",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20"
+  },
+  "vocabulary": {
+    "description": "Basic colors in Arabic for beginning learners",
+    "learningObjectives": [
+      "Learn basic color names in Arabic",
+      "Practice Arabic pronunciation",
+      "Use colors to describe objects"
+    ],
+    "words": [
+      {
+        "word": "أحمر",
+        "translation": "red",
+        "definition": "The color of blood and apples",
+        "example": "التفاحة حمراء",
+        "difficulty": "easy",
+        "category": "colors",
+        "phonetic": "/ʔaħmar/",
+        "syllables": ["أح", "مر"]
+      },
+      {
+        "word": "أزرق",
+        "translation": "blue",
+        "definition": "The color of the sky and sea",
+        "example": "السماء زرقاء",
+        "difficulty": "easy",
+        "category": "colors",
+        "phonetic": "/ʔazraq/",
+        "syllables": ["أز", "رق"]
+      },
+      {
+        "word": "أخضر",
+        "translation": "green",
+        "definition": "The color of plants and grass",
+        "example": "العشب أخضر",
+        "difficulty": "easy",
+        "category": "colors",
+        "phonetic": "/ʔaxdar/",
+        "syllables": ["أخ", "ضر"]
+      },
+      {
+        "word": "أصفر",
+        "translation": "yellow",
+        "definition": "The color of the sun and bananas",
+        "example": "الشمس صفراء",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/ʔasfar/",
+        "syllables": ["أص", "فر"]
+      },
+      {
+        "word": "أسود",
+        "translation": "black",
+        "definition": "The color of night",
+        "example": "القط أسود",
+        "difficulty": "easy",
+        "category": "colors",
+        "phonetic": "/ʔaswad/",
+        "syllables": ["أس", "ود"]
+      }
+    ]
+  },
+  "activities": [
+    {
+      "type": "color-matching",
+      "description": "Match Arabic color words with objects",
+      "instructions": "Point to objects and say their color in Arabic"
+    },
+    {
+      "type": "color-songs",
+      "description": "Learn colors through songs and rhymes",
+      "instructions": "Sing songs that include color names in Arabic"
+    },
+    {
+      "type": "color-art",
+      "description": "Create art using the learned colors",
+      "instructions": "Draw pictures and label colors in Arabic"
+    }
+  ],
+  "assessment": {
+    "type": "recognition",
+    "description": "Students should recognize and pronounce color words",
+    "criteria": [
+      "Can pronounce color words correctly",
+      "Can match colors with objects",
+      "Can use color words in simple sentences"
+    ]
+  }
+}

@@ -1,0 +1,139 @@
+{
+    "metadata": {
+        "language": "ko",
+        "grade": "1",
+        "week": "letters",
+        "theme": "한글 자모 (Hangul Letters)",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "한글 자모 (Korean Hangul letters)",
+        "learningObjectives": [
+            "한글 자모를 인식하고 쓸 수 있다",
+            "자음과 모음의 소리를 연습한다"
+        ],
+        "words": [
+            {
+                "word": "ㄱ",
+                "definition": "기역 (giyeok) - first consonant",
+                "example": "가방 (bag)"
+            },
+            {
+                "word": "ㄴ",
+                "definition": "니은 (nieun) - second consonant",
+                "example": "나무 (tree)"
+            },
+            {
+                "word": "ㄷ",
+                "definition": "디귿 (digeut) - third consonant",
+                "example": "다리 (bridge)"
+            },
+            {
+                "word": "ㄹ",
+                "definition": "리을 (rieul) - fourth consonant",
+                "example": "라면 (ramen)"
+            },
+            {
+                "word": "ㅁ",
+                "definition": "미음 (mieum) - fifth consonant",
+                "example": "마음 (heart)"
+            },
+            {
+                "word": "ㅂ",
+                "definition": "비읍 (bieup) - sixth consonant",
+                "example": "바다 (sea)"
+            },
+            {
+                "word": "ㅅ",
+                "definition": "시옷 (siot) - seventh consonant",
+                "example": "사과 (apple)"
+            },
+            {
+                "word": "ㅇ",
+                "definition": "이응 (ieung) - eighth consonant",
+                "example": "아기 (baby)"
+            },
+            {
+                "word": "ㅈ",
+                "definition": "지읒 (jieut) - ninth consonant",
+                "example": "자전거 (bicycle)"
+            },
+            {
+                "word": "ㅊ",
+                "definition": "치읓 (chieut) - tenth consonant",
+                "example": "차 (car)"
+            },
+            {
+                "word": "ㅋ",
+                "definition": "키읔 (kieuk) - eleventh consonant",
+                "example": "코 (nose)"
+            },
+            {
+                "word": "ㅌ",
+                "definition": "티읕 (tieut) - twelfth consonant",
+                "example": "토끼 (rabbit)"
+            },
+            {
+                "word": "ㅍ",
+                "definition": "피읖 (pieup) - thirteenth consonant",
+                "example": "파도 (wave)"
+            },
+            {
+                "word": "ㅎ",
+                "definition": "히읗 (hieut) - fourteenth consonant",
+                "example": "하늘 (sky)"
+            },
+            {
+                "word": "ㅏ",
+                "definition": "아 (a) - first vowel",
+                "example": "사과 (apple)"
+            },
+            {
+                "word": "ㅑ",
+                "definition": "야 (ya) - second vowel",
+                "example": "야구 (baseball)"
+            },
+            {
+                "word": "ㅓ",
+                "definition": "어 (eo) - third vowel",
+                "example": "어머니 (mother)"
+            },
+            {
+                "word": "ㅕ",
+                "definition": "여 (yeo) - fourth vowel",
+                "example": "여우 (fox)"
+            },
+            {
+                "word": "ㅗ",
+                "definition": "오 (o) - fifth vowel",
+                "example": "오리 (duck)"
+            },
+            {
+                "word": "ㅛ",
+                "definition": "요 (yo) - sixth vowel",
+                "example": "요리 (cooking)"
+            },
+            {
+                "word": "ㅜ",
+                "definition": "우 (u) - seventh vowel",
+                "example": "우유 (milk)"
+            },
+            {
+                "word": "ㅠ",
+                "definition": "유 (yu) - eighth vowel",
+                "example": "유리 (glass)"
+            },
+            {
+                "word": "ㅡ",
+                "definition": "으 (eu) - ninth vowel",
+                "example": "으깨다 (to mash)"
+            },
+            {
+                "word": "ㅣ",
+                "definition": "이 (i) - tenth vowel",
+                "example": "이름 (name)"
+            }
+        ]
+    }
+}

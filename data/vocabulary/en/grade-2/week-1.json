@@ -1,0 +1,131 @@
+{
+    "metadata": {
+        "language": "en",
+        "grade": "2",
+        "week": "1",
+        "theme": "Compound Words",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "Compound words made by combining two smaller words",
+        "learningObjectives": [
+            "Understand how compound words are formed",
+            "Break down compound words into parts",
+            "Use compound words in context"
+        ],
+        "words": [
+            {
+                "word": "sunshine",
+                "translation": "luz del sol",
+                "definition": "Light and warmth from the sun",
+                "example": "The sunshine makes the flowers grow.",
+                "difficulty": "medium",
+                "category": "compound-words",
+                "phonetic": "/ˈsʌnʃaɪn/",
+                "syllables": [
+                    "sun",
+                    "shine"
+                ],
+                "wordParts": [
+                    "sun",
+                    "shine"
+                ]
+            },
+            {
+                "word": "rainbow",
+                "translation": "arcoíris",
+                "definition": "A colorful arc in the sky after rain",
+                "example": "We saw a beautiful rainbow after the storm.",
+                "difficulty": "medium",
+                "category": "compound-words",
+                "phonetic": "/ˈreɪnboʊ/",
+                "syllables": [
+                    "rain",
+                    "bow"
+                ],
+                "wordParts": [
+                    "rain",
+                    "bow"
+                ]
+            },
+            {
+                "word": "butterfly",
+                "translation": "mariposa",
+                "definition": "An insect with colorful wings that flies",
+                "example": "The butterfly landed on the flower.",
+                "difficulty": "medium",
+                "category": "compound-words",
+                "phonetic": "/ˈbʌtərflaɪ/",
+                "syllables": [
+                    "but",
+                    "ter",
+                    "fly"
+                ],
+                "wordParts": [
+                    "butter",
+                    "fly"
+                ]
+            },
+            {
+                "word": "playground",
+                "translation": "parque infantil",
+                "definition": "A place where children can play",
+                "example": "The children play on the playground.",
+                "difficulty": "medium",
+                "category": "compound-words",
+                "phonetic": "/ˈpleɪɡraʊnd/",
+                "syllables": [
+                    "play",
+                    "ground"
+                ],
+                "wordParts": [
+                    "play",
+                    "ground"
+                ]
+            },
+            {
+                "word": "birthday",
+                "translation": "cumpleaños",
+                "definition": "The day when someone was born",
+                "example": "We celebrate her birthday with cake.",
+                "difficulty": "medium",
+                "category": "compound-words",
+                "phonetic": "/ˈbɜːrθdeɪ/",
+                "syllables": [
+                    "birth",
+                    "day"
+                ],
+                "wordParts": [
+                    "birth",
+                    "day"
+                ]
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "word-building",
+            "description": "Create compound words from word parts",
+            "instructions": "Match word parts to create compound words"
+        },
+        {
+            "type": "word-breakdown",
+            "instructions": "Break compound words into their parts and explain meaning"
+        },
+        {
+            "type": "compound-word-story",
+            "description": "Write a story using compound words",
+            "instructions": "Use as many compound words as possible in a short story"
+        }
+    ],
+    "assessment": {
+        "type": "understanding",
+        "description": "Students should understand compound word formation",
+        "criteria": [
+            "Can identify the two parts of a compound word",
+            "Can explain the meaning of each part",
+            "Can use compound words in sentences"
+        ]
+    }
+}

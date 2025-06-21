@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "language": "ko",
+    "grade": "1",
+    "week": "1",
+    "theme": "색깔 (Colors)",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20"
+  },
+  "vocabulary": {
+    "description": "Basic colors in Korean for beginning learners",
+    "learningObjectives": [
+      "Learn basic color names in Korean",
+      "Practice Korean pronunciation",
+      "Use colors to describe objects"
+    ],
+    "words": [
+      {
+        "word": "빨간색",
+        "translation": "red",
+        "definition": "The color of blood and apples",
+        "example": "사과는 빨간색입니다",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/ppalgansaek/",
+        "syllables": ["빨", "간", "색"]
+      },
+      {
+        "word": "파란색",
+        "translation": "blue",
+        "definition": "The color of the sky and sea",
+        "example": "하늘은 파란색입니다",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/paransaek/",
+        "syllables": ["파", "란", "색"]
+      },
+      {
+        "word": "초록색",
+        "translation": "green",
+        "definition": "The color of plants and grass",
+        "example": "풀은 초록색입니다",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/choroksaek/",
+        "syllables": ["초", "록", "색"]
+      },
+      {
+        "word": "노란색",
+        "translation": "yellow",
+        "definition": "The color of the sun and bananas",
+        "example": "바나나는 노란색입니다",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/noransaek/",
+        "syllables": ["노", "란", "색"]
+      },
+      {
+        "word": "검은색",
+        "translation": "black",
+        "definition": "The color of night",
+        "example": "고양이는 검은색입니다",
+        "difficulty": "medium",
+        "category": "colors",
+        "phonetic": "/geomeunsaek/",
+        "syllables": ["검", "은", "색"]
+      }
+    ]
+  },
+  "activities": [
+    {
+      "type": "color-matching",
+      "description": "Match Korean color words with objects",
+      "instructions": "Point to objects and say their color in Korean"
+    },
+    {
+      "type": "color-songs",
+      "description": "Learn colors through songs and rhymes",
+      "instructions": "Sing songs that include color names in Korean"
+    },
+    {
+      "type": "color-art",
+      "description": "Create art using the learned colors",
+      "instructions": "Draw pictures and label colors in Korean"
+    }
+  ],
+  "assessment": {
+    "type": "recognition",
+    "description": "Students should recognize and pronounce color words",
+    "criteria": [
+      "Can pronounce color words correctly",
+      "Can match colors with objects",
+      "Can use color words in simple sentences"
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+    "metadata": {
+        "language": "en",
+        "grade": "1",
+        "week": "2",
+        "theme": "Animals",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "Common animals that children encounter in daily life",
+        "learningObjectives": [
+            "Learn names of common animals",
+            "Practice animal sounds",
+            "Build descriptive vocabulary"
+        ],
+        "words": [
+            {
+                "word": "cat",
+                "translation": "gato",
+                "definition": "A small domesticated animal that purrs",
+                "example": "The cat is sleeping on the sofa.",
+                "difficulty": "easy",
+                "category": "animals",
+                "phonetic": "/kæt/",
+                "syllables": [
+                    "cat"
+                ],
+                "animalSound": "meow"
+            },
+            {
+                "word": "dog",
+                "translation": "perro",
+                "definition": "A friendly animal that barks and wags its tail",
+                "example": "The dog runs in the park.",
+                "difficulty": "easy",
+                "category": "animals",
+                "phonetic": "/dɔːɡ/",
+                "syllables": [
+                    "dog"
+                ],
+                "animalSound": "woof"
+            },
+            {
+                "word": "bird",
+                "translation": "pájaro",
+                "definition": "An animal with feathers that can fly",
+                "example": "The bird sings in the tree.",
+                "difficulty": "easy",
+                "category": "animals",
+                "phonetic": "/bɜːrd/",
+                "syllables": [
+                    "bird"
+                ],
+                "animalSound": "tweet"
+            },
+            {
+                "word": "fish",
+                "translation": "pez",
+                "definition": "An animal that lives in water and swims",
+                "example": "The fish swims in the bowl.",
+                "difficulty": "easy",
+                "category": "animals",
+                "phonetic": "/fɪʃ/",
+                "syllables": [
+                    "fish"
+                ],
+                "animalSound": "bubble"
+            },
+            {
+                "word": "rabbit",
+                "translation": "conejo",
+                "definition": "A small animal with long ears that hops",
+                "example": "The rabbit eats carrots.",
+                "difficulty": "medium",
+                "category": "animals",
+                "phonetic": "/ˈræbɪt/",
+                "syllables": [
+                    "rab",
+                    "bit"
+                ],
+                "animalSound": "hop"
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "animal-sounds",
+            "description": "Match animals with their sounds",
+            "instructions": "Make animal sounds and have students guess the animal"
+        },
+        {
+            "type": "animal-description",
+            "description": "Describe animals using adjectives",
+            "instructions": "Use words like big, small, furry, fast to describe animals"
+        },
+        {
+            "type": "animal-habitat",
+            "description": "Learn where different animals live",
+            "instructions": "Match animals with their homes (house, farm, forest, etc.)"
+        }
+    ],
+    "assessment": {
+        "type": "recognition",
+        "description": "Students should be able to name animals and their characteristics",
+        "criteria": [
+            "Can name the animal from a picture",
+            "Can make the correct animal sound",
+            "Can describe one characteristic of the animal"
+        ]
+    }
+}

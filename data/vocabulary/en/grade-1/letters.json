@@ -1,0 +1,149 @@
+{
+    "metadata": {
+        "language": "en",
+        "grade": "1",
+        "week": "letters",
+        "theme": "Alphabet",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "The English alphabet (A-Z)",
+        "learningObjectives": [
+            "Recognize and name all uppercase and lowercase letters",
+            "Practice letter sounds"
+        ],
+        "words": [
+            {
+                "word": "A",
+                "definition": "First letter of the alphabet",
+                "example": "A is for apple."
+            },
+            {
+                "word": "B",
+                "definition": "Second letter of the alphabet",
+                "example": "B is for ball."
+            },
+            {
+                "word": "C",
+                "definition": "Third letter of the alphabet",
+                "example": "C is for cat."
+            },
+            {
+                "word": "D",
+                "definition": "Fourth letter of the alphabet",
+                "example": "D is for dog."
+            },
+            {
+                "word": "E",
+                "definition": "Fifth letter of the alphabet",
+                "example": "E is for elephant."
+            },
+            {
+                "word": "F",
+                "definition": "Sixth letter of the alphabet",
+                "example": "F is for fish."
+            },
+            {
+                "word": "G",
+                "definition": "Seventh letter of the alphabet",
+                "example": "G is for goat."
+            },
+            {
+                "word": "H",
+                "definition": "Eighth letter of the alphabet",
+                "example": "H is for hat."
+            },
+            {
+                "word": "I",
+                "definition": "Ninth letter of the alphabet",
+                "example": "I is for igloo."
+            },
+            {
+                "word": "J",
+                "definition": "Tenth letter of the alphabet",
+                "example": "J is for juice."
+            },
+            {
+                "word": "K",
+                "definition": "Eleventh letter of the alphabet",
+                "example": "K is for kite."
+            },
+            {
+                "word": "L",
+                "definition": "Twelfth letter of the alphabet",
+                "example": "L is for lion."
+            },
+            {
+                "word": "M",
+                "definition": "Thirteenth letter of the alphabet",
+                "example": "M is for monkey."
+            },
+            {
+                "word": "N",
+                "definition": "Fourteenth letter of the alphabet",
+                "example": "N is for nest."
+            },
+            {
+                "word": "O",
+                "definition": "Fifteenth letter of the alphabet",
+                "example": "O is for octopus."
+            },
+            {
+                "word": "P",
+                "definition": "Sixteenth letter of the alphabet",
+                "example": "P is for pig."
+            },
+            {
+                "word": "Q",
+                "definition": "Seventeenth letter of the alphabet",
+                "example": "Q is for queen."
+            },
+            {
+                "word": "R",
+                "definition": "Eighteenth letter of the alphabet",
+                "example": "R is for rabbit."
+            },
+            {
+                "word": "S",
+                "definition": "Nineteenth letter of the alphabet",
+                "example": "S is for sun."
+            },
+            {
+                "word": "T",
+                "definition": "Twentieth letter of the alphabet",
+                "example": "T is for tiger."
+            },
+            {
+                "word": "U",
+                "definition": "Twenty-first letter of the alphabet",
+                "example": "U is for umbrella."
+            },
+            {
+                "word": "V",
+                "definition": "Twenty-second letter of the alphabet",
+                "example": "V is for van."
+            },
+            {
+                "word": "W",
+                "definition": "Twenty-third letter of the alphabet",
+                "example": "W is for whale."
+            },
+            {
+                "word": "X",
+                "definition": "Twenty-fourth letter of the alphabet",
+                "example": "X is for xylophone."
+            },
+            {
+                "word": "Y",
+                "definition": "Twenty-fifth letter of the alphabet",
+                "example": "Y is for yak."
+            },
+            {
+                "word": "Z",
+                "definition": "Twenty-sixth letter of the alphabet",
+                "example": "Z is for zebra."
+            }
+        ]
+    }
+}

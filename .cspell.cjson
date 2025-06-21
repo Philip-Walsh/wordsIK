@@ -1,0 +1,46 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "WordsIK",
+        "vocabulary",
+        "grammar",
+        "spelling",
+        "profanity",
+        "cspell",
+        "vale",
+        "gitleaks",
+        "trufflehog",
+        "lint-staged",
+        "husky",
+        "pre-commit",
+        "UTF-8",
+        "api_key",
+        "lang-data",
+        "vocabulary-template"
+    ],
+    "dictionaries": [
+        "en",
+        "educational-words"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "educational-words",
+            "path": "./educational-words.txt",
+            "description": "Educational vocabulary and phonetic terms",
+            "addWords": true
+        }
+    ],
+    "ignorePaths": [
+        "node_modules/**",
+        ".git/**",
+        "*.log",
+        "dist/**",
+        "build/**",
+        "coverage/**"
+    ],
+    "allowCompoundWords": true,
+    "caseSensitive": false,
+    "maxNumberOfProblems": 1000,
+    "minWordLength": 3
+}

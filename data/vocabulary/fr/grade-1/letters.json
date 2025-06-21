@@ -1,0 +1,149 @@
+{
+    "metadata": {
+        "language": "fr",
+        "grade": "1",
+        "week": "letters",
+        "theme": "Alphabet",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "L'alphabet français (A-Z)",
+        "learningObjectives": [
+            "Reconnaître et nommer toutes les lettres majuscules et minuscules",
+            "Pratiquer les sons des lettres"
+        ],
+        "words": [
+            {
+                "word": "A",
+                "definition": "Première lettre de l'alphabet",
+                "example": "A comme avion."
+            },
+            {
+                "word": "B",
+                "definition": "Deuxième lettre de l'alphabet",
+                "example": "B comme ballon."
+            },
+            {
+                "word": "C",
+                "definition": "Troisième lettre de l'alphabet",
+                "example": "C comme chat."
+            },
+            {
+                "word": "D",
+                "definition": "Quatrième lettre de l'alphabet",
+                "example": "D comme dauphin."
+            },
+            {
+                "word": "E",
+                "definition": "Cinquième lettre de l'alphabet",
+                "example": "E comme éléphant."
+            },
+            {
+                "word": "F",
+                "definition": "Sixième lettre de l'alphabet",
+                "example": "F comme fleur."
+            },
+            {
+                "word": "G",
+                "definition": "Septième lettre de l'alphabet",
+                "example": "G comme girafe."
+            },
+            {
+                "word": "H",
+                "definition": "Huitième lettre de l'alphabet",
+                "example": "H comme hibou."
+            },
+            {
+                "word": "I",
+                "definition": "Neuvième lettre de l'alphabet",
+                "example": "I comme igloo."
+            },
+            {
+                "word": "J",
+                "definition": "Dixième lettre de l'alphabet",
+                "example": "J comme jardin."
+            },
+            {
+                "word": "K",
+                "definition": "Onzième lettre de l'alphabet",
+                "example": "K comme kangourou."
+            },
+            {
+                "word": "L",
+                "definition": "Douzième lettre de l'alphabet",
+                "example": "L comme lion."
+            },
+            {
+                "word": "M",
+                "definition": "Treizième lettre de l'alphabet",
+                "example": "M comme mouton."
+            },
+            {
+                "word": "N",
+                "definition": "Quatorzième lettre de l'alphabet",
+                "example": "N comme nuage."
+            },
+            {
+                "word": "O",
+                "definition": "Quinzième lettre de l'alphabet",
+                "example": "O comme ours."
+            },
+            {
+                "word": "P",
+                "definition": "Seizième lettre de l'alphabet",
+                "example": "P comme poisson."
+            },
+            {
+                "word": "Q",
+                "definition": "Dix-septième lettre de l'alphabet",
+                "example": "Q comme quiche."
+            },
+            {
+                "word": "R",
+                "definition": "Dix-huitième lettre de l'alphabet",
+                "example": "R comme renard."
+            },
+            {
+                "word": "S",
+                "definition": "Dix-neuvième lettre de l'alphabet",
+                "example": "S comme soleil."
+            },
+            {
+                "word": "T",
+                "definition": "Vingtième lettre de l'alphabet",
+                "example": "T comme tigre."
+            },
+            {
+                "word": "U",
+                "definition": "Vingt-et-unième lettre de l'alphabet",
+                "example": "U comme usine."
+            },
+            {
+                "word": "V",
+                "definition": "Vingt-deuxième lettre de l'alphabet",
+                "example": "V comme vache."
+            },
+            {
+                "word": "W",
+                "definition": "Vingt-troisième lettre de l'alphabet",
+                "example": "W comme wagon."
+            },
+            {
+                "word": "X",
+                "definition": "Vingt-quatrième lettre de l'alphabet",
+                "example": "X comme xylophone."
+            },
+            {
+                "word": "Y",
+                "definition": "Vingt-cinquième lettre de l'alphabet",
+                "example": "Y comme yaourt."
+            },
+            {
+                "word": "Z",
+                "definition": "Vingt-sixième lettre de l'alphabet",
+                "example": "Z comme zèbre."
+            }
+        ]
+    }
+}

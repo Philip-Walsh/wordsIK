@@ -2,34 +2,64 @@
   "name": "words-i-know",
   "version": "1.0.0",
   "description": "Educational vocabulary repository with content validation",
+  "main": "dist/index.js",
+  "bin": {
+    "wordsik": "./dist/cli.js"
+  },
   "scripts": {
-    "validate": "node validation/profanity-check.js",
-    "validate-all": "npm run validate-json && npm run validate-content && npm run spell-check",
-    "validate-json": "find data/ -name '*.json' -exec node -e \"JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')); console.log('✓', process.argv[1])\" {} \\;",
-    "validate-content": "node validation/profanity-check.js",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "validate": "npm run build && node dist/cli.js validate",
+    "validate-all": "npm run build && node dist/cli.js validate --all",
+    "validate-json": "npm run build && node dist/cli.js validate --json",
+    "validate-content": "npm run build && node dist/cli.js validate --content",
+    "validate-translations": "npm run build && node dist/cli.js validate --translations",
+    "validate-languages": "npm run build && node dist/cli.js validate --languages",
     "spell-check": "npx cspell \"data/**/*.json\" \"docs/**/*.md\" \"*.md\"",
     "lint": "vale docs/ *.md CONTRIBUTING.md",
+    "lint:ts": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "prepare": "husky install"
   },
   "dependencies": {
-    "bad-words": "^3.0.4"
+    "bad-words": "^3.0.4",
+    "commander": "^11.1.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "boxen": "^7.1.1",
+    "glob": "^10.3.10"
   },
   "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/glob": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "cspell": "^8.6.0"
+    "cspell": "^8.6.0",
+    "typescript": "^5.3.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.8",
+    "ts-jest": "^29.1.1"
   },
   "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "npm run build"
+    ],
     "*.json": [
-      "node validation/profanity-check.js",
-      "npx cspell"
+      "npm run build && node dist/cli.js validate --content"
     ],
     "*.md": [
       "npx cspell"
     ]
   },
   "engines": {
-    "node": ">=16.0.0",
+    "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
   "repository": {
@@ -42,7 +72,8 @@
     "grammar",
     "spelling",
     "multilingual",
-    "learning"
+    "learning",
+    "cli"
   ],
   "author": "Your Name",
   "license": "MIT"

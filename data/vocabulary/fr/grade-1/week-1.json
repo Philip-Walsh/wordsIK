@@ -1,0 +1,167 @@
+{
+    "metadata": {
+        "language": "fr",
+        "grade": "1",
+        "week": "1",
+        "theme": "Nombres (Numbers)",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "Numbers 1-10 in French for beginning learners",
+        "learningObjectives": [
+            "Learn to count from 1 to 10 in French",
+            "Practice French pronunciation",
+            "Use numbers in context"
+        ],
+        "words": [
+            {
+                "word": "un",
+                "translation": "one",
+                "definition": "Le premier nombre",
+                "example": "J'ai un chat.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/œ̃/",
+                "syllables": [
+                    "un"
+                ]
+            },
+            {
+                "word": "deux",
+                "translation": "two",
+                "definition": "Le deuxième nombre",
+                "example": "J'ai deux chiens.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/dø/",
+                "syllables": [
+                    "deux"
+                ]
+            },
+            {
+                "word": "trois",
+                "translation": "three",
+                "definition": "Le troisième nombre",
+                "example": "Il y a trois pommes.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/tʁwa/",
+                "syllables": [
+                    "trois"
+                ]
+            },
+            {
+                "word": "quatre",
+                "translation": "four",
+                "definition": "Le quatrième nombre",
+                "example": "J'ai quatre crayons.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/katʁ/",
+                "syllables": [
+                    "qua",
+                    "tre"
+                ]
+            },
+            {
+                "word": "cinq",
+                "translation": "five",
+                "definition": "Le cinquième nombre",
+                "example": "Il y a cinq livres.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/sɛ̃k/",
+                "syllables": [
+                    "cinq"
+                ]
+            },
+            {
+                "word": "six",
+                "translation": "six",
+                "definition": "Le sixième nombre",
+                "example": "J'ai six amis.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/sis/",
+                "syllables": [
+                    "six"
+                ]
+            },
+            {
+                "word": "sept",
+                "translation": "seven",
+                "definition": "Le septième nombre",
+                "example": "Il y a sept jours dans une semaine.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/sɛt/",
+                "syllables": [
+                    "sept"
+                ]
+            },
+            {
+                "word": "huit",
+                "translation": "eight",
+                "definition": "Le huitième nombre",
+                "example": "J'ai huit crayons de couleur.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/ɥit/",
+                "syllables": [
+                    "huit"
+                ]
+            },
+            {
+                "word": "neuf",
+                "translation": "nine",
+                "definition": "Le neuvième nombre",
+                "example": "Il y a neuf planètes.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/nœf/",
+                "syllables": [
+                    "neuf"
+                ]
+            },
+            {
+                "word": "dix",
+                "translation": "ten",
+                "definition": "Le dixième nombre",
+                "example": "J'ai dix doigts.",
+                "difficulty": "easy",
+                "category": "numbers",
+                "phonetic": "/dis/",
+                "syllables": [
+                    "dix"
+                ]
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "counting-practice",
+            "description": "Count objects in French",
+            "instructions": "Count various objects in the classroom using French numbers"
+        },
+        {
+            "type": "number-songs",
+            "description": "Learn numbers through songs",
+            "instructions": "Sing French counting songs and rhymes"
+        },
+        {
+            "type": "number-games",
+            "description": "Play number recognition games",
+            "instructions": "Match written numbers with spoken French words"
+        }
+    ],
+    "assessment": {
+        "type": "recognition",
+        "description": "Students should recognize and pronounce French numbers",
+        "criteria": [
+            "Can count from 1 to 10 in French",
+            "Can recognize written numbers",
+            "Can use numbers in simple sentences"
+        ]
+    }
+}

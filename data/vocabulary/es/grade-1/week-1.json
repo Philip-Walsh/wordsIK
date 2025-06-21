@@ -1,0 +1,113 @@
+{
+    "metadata": {
+        "language": "es",
+        "grade": "1",
+        "week": "1",
+        "theme": "Colores (Colors)",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "Basic colors in Spanish for beginning learners",
+        "learningObjectives": [
+            "Learn basic color names in Spanish",
+            "Practice pronunciation of Spanish words",
+            "Use colors to describe objects"
+        ],
+        "words": [
+            {
+                "word": "rojo",
+                "translation": "red",
+                "definition": "El color de la sangre y las manzanas",
+                "example": "El coche es rojo.",
+                "difficulty": "easy",
+                "category": "colors",
+                "phonetic": "/ˈroxo/",
+                "syllables": [
+                    "ro",
+                    "jo"
+                ]
+            },
+            {
+                "word": "azul",
+                "translation": "blue",
+                "definition": "El color del cielo y el mar",
+                "example": "El cielo es azul.",
+                "difficulty": "easy",
+                "category": "colors",
+                "phonetic": "/aˈθul/",
+                "syllables": [
+                    "a",
+                    "zul"
+                ]
+            },
+            {
+                "word": "verde",
+                "translation": "green",
+                "definition": "El color de las plantas y la hierba",
+                "example": "La hierba es verde.",
+                "difficulty": "easy",
+                "category": "colors",
+                "phonetic": "/ˈberðe/",
+                "syllables": [
+                    "ver",
+                    "de"
+                ]
+            },
+            {
+                "word": "amarillo",
+                "translation": "yellow",
+                "definition": "El color del sol y los plátanos",
+                "example": "El sol es amarillo.",
+                "difficulty": "medium",
+                "category": "colors",
+                "phonetic": "/amaˈriʎo/",
+                "syllables": [
+                    "a",
+                    "ma",
+                    "ri",
+                    "llo"
+                ]
+            },
+            {
+                "word": "negro",
+                "translation": "black",
+                "definition": "El color de la noche",
+                "example": "El gato es negro.",
+                "difficulty": "easy",
+                "category": "colors",
+                "phonetic": "/ˈneɣro/",
+                "syllables": [
+                    "ne",
+                    "gro"
+                ]
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "color-matching",
+            "description": "Match Spanish color words with objects",
+            "instructions": "Point to objects and say their color in Spanish"
+        },
+        {
+            "type": "color-songs",
+            "description": "Learn colors through songs and rhymes",
+            "instructions": "Sing songs that include color names in Spanish"
+        },
+        {
+            "type": "color-art",
+            "description": "Create art using the learned colors",
+            "instructions": "Draw pictures and label colors in Spanish"
+        }
+    ],
+    "assessment": {
+        "type": "recognition",
+        "description": "Students should recognize and pronounce color words",
+        "criteria": [
+            "Can pronounce color words correctly",
+            "Can match colors with objects",
+            "Can use color words in simple sentences"
+        ]
+    }
+}

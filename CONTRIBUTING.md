@@ -131,6 +131,8 @@ When contributing content in languages other than English:
 Currently supported languages:
 
 - English (en)
+- Arabic (ar)
+- Korean (ko)
 - Spanish (es)
 - French (fr)
 

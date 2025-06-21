@@ -1,0 +1,88 @@
+{
+    "metadata": {
+        "language": "en",
+        "grade": "1",
+        "week": "1",
+        "theme": "Basic Sentence Structure",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "grammar": {
+        "description": "Introduction to basic sentence structure and capitalization",
+        "learningObjectives": [
+            "Understand that sentences begin with capital letters",
+            "Learn that sentences end with punctuation",
+            "Recognize simple subject-verb structure"
+        ],
+        "rules": [
+            {
+                "rule": "Capitalization",
+                "description": "The first letter of a sentence must be capitalized",
+                "examples": [
+                    "The cat is sleeping.",
+                    "I like pizza.",
+                    "We go to school."
+                ],
+                "practice": [
+                    "the dog runs fast → The dog runs fast.",
+                    "i am happy → I am happy.",
+                    "she reads books → She reads books."
+                ]
+            },
+            {
+                "rule": "End Punctuation",
+                "description": "Sentences end with a period (.), question mark (?), or exclamation mark (!)",
+                "examples": [
+                    "The sun is bright.",
+                    "Do you like ice cream?",
+                    "What a beautiful day!"
+                ],
+                "practice": [
+                    "The bird sings → The bird sings.",
+                    "Where is my book → Where is my book?",
+                    "I love this game → I love this game!"
+                ]
+            },
+            {
+                "rule": "Simple Sentences",
+                "description": "A simple sentence has a subject (who/what) and a verb (action)",
+                "examples": [
+                    "The cat (subject) sleeps (verb).",
+                    "I (subject) run (verb).",
+                    "Birds (subject) fly (verb)."
+                ],
+                "practice": [
+                    "Identify the subject and verb in: The dog barks.",
+                    "Identify the subject and verb in: I eat lunch.",
+                    "Identify the subject and verb in: Flowers grow."
+                ]
+            }
+        ]
+    },
+    "activities": [
+        {
+            "type": "sentence-fixing",
+            "description": "Fix sentences with capitalization and punctuation errors",
+            "instructions": "Students correct sentences by adding proper capitalization and punctuation"
+        },
+        {
+            "type": "sentence-building",
+            "description": "Build simple sentences using given words",
+            "instructions": "Students combine words to create proper sentences"
+        },
+        {
+            "type": "subject-verb-identification",
+            "description": "Identify subjects and verbs in simple sentences",
+            "instructions": "Students underline subjects and circle verbs in sentences"
+        }
+    ],
+    "assessment": {
+        "type": "application",
+        "description": "Students should be able to write simple sentences with proper capitalization and punctuation",
+        "criteria": [
+            "Can capitalize the first letter of sentences",
+            "Can add appropriate end punctuation",
+            "Can identify subjects and verbs in simple sentences"
+        ]
+    }
+}

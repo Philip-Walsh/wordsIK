@@ -1,0 +1,154 @@
+{
+    "metadata": {
+        "language": "es",
+        "grade": "1",
+        "week": "letters",
+        "theme": "Alfabeto",
+        "version": "1.0",
+        "lastUpdated": "2024-03-20"
+    },
+    "vocabulary": {
+        "description": "El alfabeto español (A-Z, incluyendo Ñ)",
+        "learningObjectives": [
+            "Reconocer y nombrar todas las letras mayúsculas y minúsculas",
+            "Practicar los sonidos de las letras"
+        ],
+        "words": [
+            {
+                "word": "A",
+                "definition": "Primera letra del alfabeto",
+                "example": "A es para árbol."
+            },
+            {
+                "word": "B",
+                "definition": "Segunda letra del alfabeto",
+                "example": "B es para barco."
+            },
+            {
+                "word": "C",
+                "definition": "Tercera letra del alfabeto",
+                "example": "C es para casa."
+            },
+            {
+                "word": "D",
+                "definition": "Cuarta letra del alfabeto",
+                "example": "D es para dado."
+            },
+            {
+                "word": "E",
+                "definition": "Quinta letra del alfabeto",
+                "example": "E es para elefante."
+            },
+            {
+                "word": "F",
+                "definition": "Sexta letra del alfabeto",
+                "example": "F es para foca."
+            },
+            {
+                "word": "G",
+                "definition": "Séptima letra del alfabeto",
+                "example": "G es para gato."
+            },
+            {
+                "word": "H",
+                "definition": "Octava letra del alfabeto",
+                "example": "H es para helado."
+            },
+            {
+                "word": "I",
+                "definition": "Novena letra del alfabeto",
+                "example": "I es para iguana."
+            },
+            {
+                "word": "J",
+                "definition": "Décima letra del alfabeto",
+                "example": "J es para jirafa."
+            },
+            {
+                "word": "K",
+                "definition": "Undécima letra del alfabeto",
+                "example": "K es para koala."
+            },
+            {
+                "word": "L",
+                "definition": "Duodécima letra del alfabeto",
+                "example": "L es para león."
+            },
+            {
+                "word": "M",
+                "definition": "Decimotercera letra del alfabeto",
+                "example": "M es para mano."
+            },
+            {
+                "word": "N",
+                "definition": "Decimocuarta letra del alfabeto",
+                "example": "N es para nube."
+            },
+            {
+                "word": "Ñ",
+                "definition": "Letra especial del alfabeto español",
+                "example": "Ñ es para ñu."
+            },
+            {
+                "word": "O",
+                "definition": "Decimoquinta letra del alfabeto",
+                "example": "O es para oso."
+            },
+            {
+                "word": "P",
+                "definition": "Decimosexta letra del alfabeto",
+                "example": "P es para pato."
+            },
+            {
+                "word": "Q",
+                "definition": "Decimoséptima letra del alfabeto",
+                "example": "Q es para queso."
+            },
+            {
+                "word": "R",
+                "definition": "Decimoctava letra del alfabeto",
+                "example": "R es para ratón."
+            },
+            {
+                "word": "S",
+                "definition": "Decimonovena letra del alfabeto",
+                "example": "S es para sol."
+            },
+            {
+                "word": "T",
+                "definition": "Vigésima letra del alfabeto",
+                "example": "T es para tigre."
+            },
+            {
+                "word": "U",
+                "definition": "Vigésima primera letra del alfabeto",
+                "example": "U es para uva."
+            },
+            {
+                "word": "V",
+                "definition": "Vigésima segunda letra del alfabeto",
+                "example": "V es para vaca."
+            },
+            {
+                "word": "W",
+                "definition": "Vigésima tercera letra del alfabeto",
+                "example": "W es para wafle."
+            },
+            {
+                "word": "X",
+                "definition": "Vigésima cuarta letra del alfabeto",
+                "example": "X es para xilófono."
+            },
+            {
+                "word": "Y",
+                "definition": "Vigésima quinta letra del alfabeto",
+                "example": "Y es para yate."
+            },
+            {
+                "word": "Z",
+                "definition": "Vigésima sexta letra del alfabeto",
+                "example": "Z es para zapato."
+            }
+        ]
+    }
+}
