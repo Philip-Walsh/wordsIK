@@ -5,11 +5,13 @@ Thank you for your interest in contributing to WordsIK! This repository is desig
 ## Table of Contents
 
 - [Getting Started](#getting-started)
+- [Development Setup](#development-setup)
 - [How to Contribute](#how-to-contribute)
 - [Content Guidelines](#content-guidelines)
 - [Multi-Language Support](#multi-language-support)
 - [Quality Standards](#quality-standards)
-- [Development Setup](#development-setup)
+- [CLI Development](#cli-development)
+- [Testing and Validation](#testing-and-validation)
 - [Code of Conduct](#code-of-conduct)
 
 ## Getting Started
@@ -24,10 +26,87 @@ Thank you for your interest in contributing to WordsIK! This repository is desig
    ```bash
    npm install
    ```
-4. **Create a new branch** for your contribution:
+4. **Build the CLI**:
+   ```bash
+   npm run build
+   ```
+5. **Create a new branch** for your contribution:
    ```bash
    git checkout -b feature/add-new-vocabulary
    ```
+
+## Development Setup
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v8 or higher)
+- Git
+
+### Local Development
+
+1. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Build the TypeScript CLI**:
+
+   ```bash
+   npm run build
+   ```
+
+3. **Set up pre-commit hooks** (automatically configured):
+
+   ```bash
+   npm run prepare
+   ```
+
+4. **Verify installation**:
+   ```bash
+   npm run status
+   ```
+
+### Development Scripts
+
+The project includes comprehensive npm scripts for development:
+
+```bash
+# Build and validation
+npm run build                    # Build TypeScript
+npm run dev                      # Watch mode for development
+npm run validate                 # Basic validation
+npm run validate-all            # Full validation with all checks
+npm run validate-debug          # Validation with debug logging
+npm run validate-verbose        # Validation with verbose logging
+npm run validate-ci             # CI-optimized validation
+
+# Status and information
+npm run status                  # Show repository status
+npm run status-verbose          # Detailed status with logging
+npm run template                # Generate vocabulary templates
+
+# Testing and quality
+npm run test                    # Run tests
+npm run test:watch              # Watch mode for tests
+npm run test:coverage           # Tests with coverage
+npm run test:ci                 # CI-optimized tests
+
+# Linting and formatting
+npm run lint:ts                 # TypeScript linting
+npm run lint:fix                # Auto-fix linting issues
+npm run lint:all                # All linting checks
+
+# Log management
+npm run logs:clean              # Clean log files
+npm run logs:view               # View all logs
+npm run logs:tail               # Tail logs in real-time
+
+# Cleanup
+npm run clean                   # Clean build artifacts
+npm run clean:all               # Full cleanup
+```
 
 ## How to Contribute
 
@@ -58,20 +137,35 @@ Thank you for your interest in contributing to WordsIK! This repository is desig
    }
    ```
 
-3. **Run validation locally**:
+3. **Validate your content locally**:
 
    ```bash
+   # Basic validation
    npm run validate
+
+   # Full validation with logging
+   npm run validate-verbose -- --log-file logs/my-validation.log
+
+   # Debug validation for troubleshooting
+   npm run validate-debug
    ```
 
-4. **Commit your changes**:
+4. **Check status and quality**:
+
+   ```bash
+   npm run status
+   npm run lint:all
+   npm run test
+   ```
+
+5. **Commit your changes**:
 
    ```bash
    git add .
    git commit -m "Add new vocabulary for Spanish Grade 1 - Animals"
    ```
 
-5. **Push and create a Pull Request**
+6. **Push and create a Pull Request**
 
 ### Adding Grammar Content
 
@@ -83,6 +177,11 @@ Thank you for your interest in contributing to WordsIK! This repository is desig
 
 2. **Create structured grammar lessons** with clear examples and exercises
 
+3. **Validate grammar content**:
+   ```bash
+   npm run validate -- --content
+   ```
+
 ### Adding Spelling Content
 
 1. **Use the spelling directory structure**:
@@ -92,6 +191,11 @@ Thank you for your interest in contributing to WordsIK! This repository is desig
    ```
 
 2. **Follow the existing format** (see `data/spelling/en/grade-1/week-1.json`)
+
+3. **Validate spelling content**:
+   ```bash
+   npm run validate -- --content --verbose
+   ```
 
 ## Content Guidelines
 
@@ -156,11 +260,13 @@ To add a new language:
 
 All contributions are automatically checked for:
 
-1. **Profanity Filter**: Content is scanned for inappropriate language
-2. **Spell Checking**: Spelling errors are flagged
-3. **Grammar Linting**: Vale checks for writing quality and style
-4. **Secret Detection**: Prevents accidental commit of sensitive information
-5. **JSON Validation**: Ensures proper JSON formatting
+1. **JSON Validation**: Syntax and UTF-8 encoding validation
+2. **Content Validation**: Profanity filtering and content quality checks
+3. **Translation Validation**: Consistency between language versions
+4. **Language Validation**: Language-specific characters and structure
+5. **Spell Checking**: Spelling errors in documentation
+6. **Grammar Linting**: Vale checks for writing quality and style
+7. **Secret Detection**: Prevents accidental commit of sensitive information
 
 ### Manual Review Process
 
@@ -178,54 +284,139 @@ Before submitting a pull request, ensure:
 - [ ] JSON files are properly formatted
 - [ ] No sensitive information is included
 - [ ] Content follows the established structure
-- [ ] Local validation passes (`npm run validate`)
+- [ ] Local validation passes (`npm run validate-all`)
+- [ ] All tests pass (`npm test`)
+- [ ] Linting passes (`npm run lint:all`)
+- [ ] Logs are clean and informative
 
-## Development Setup
+## CLI Development
 
-### Prerequisites
+### Architecture
 
-- Node.js (v16 or higher)
-- npm or yarn
-- Git
+The CLI is built with TypeScript and follows a modular architecture:
 
-### Local Development
+- **CLI Entry Point**: `src/cli.ts` - Main command interface
+- **Validation Manager**: `src/ValidationManager.ts` - Orchestrates validation
+- **Validators**: `src/validators/` - Individual validation modules
+- **Utilities**: `src/utils/` - Shared utilities and logging
+- **Types**: `src/types/` - TypeScript type definitions
 
-1. **Install dependencies**:
+### Adding New Validators
 
-   ```bash
-   npm install
+1. **Create validator class** extending `BaseValidator`:
+
+   ```typescript
+   export class MyValidator extends BaseValidator {
+     async validate(filePath: string): Promise<ValidationResult> {
+       // Implementation
+     }
+   }
    ```
 
-2. **Set up pre-commit hooks** (automatically configured):
+2. **Register in ValidationManager**:
 
-   ```bash
-   npm run prepare
+   ```typescript
+   this.validators.push(new MyValidator(this.logger));
    ```
 
-3. **Run validation**:
-   ```bash
-   npm run validate
+3. **Add CLI options** in `cli.ts`:
+   ```typescript
+   .option('--my-validation', 'Run my custom validation')
    ```
 
-### Testing Your Changes
+### Logging System
 
-1. **Validate JSON structure**:
+The CLI includes a comprehensive logging system:
+
+```typescript
+// Log levels: ERROR, WARN, INFO, DEBUG, VERBOSE
+logger.error("Critical error occurred");
+logger.warn("Warning about potential issue");
+logger.info("General information");
+logger.debug("Debug information");
+logger.verbose("Very detailed information");
+```
+
+### CLI Usage Examples
+
+```bash
+# Basic validation
+npm start validate
+
+# Full validation with logging
+npm start validate --all --verbose --log-file logs/validation.log
+
+# Specific validation types
+npm start validate --content --translations
+
+# Status check
+npm start status --verbose
+
+# Template generation
+npm start template data/vocabulary/en/grade-1/week-1.json es
+```
+
+## Testing and Validation
+
+### Running Tests
+
+```bash
+# All tests
+npm test
+
+# Watch mode
+npm run test:watch
+
+# With coverage
+npm run test:coverage
+
+# CI mode
+npm run test:ci
+```
+
+### Validation Workflow
+
+```bash
+# Development validation
+npm run validate-debug
+
+# Pre-commit validation
+npm run validate-verbose
+
+# CI validation
+npm run validate-ci
+```
+
+### Log Analysis
+
+```bash
+# View logs
+npm run logs:view
+
+# Tail logs
+npm run logs:tail
+
+# Clean logs
+npm run logs:clean
+```
+
+### Debugging
+
+1. **Enable debug logging**:
 
    ```bash
-   node validation/profanity-check.js path/to/your/file.json
+   npm run validate-debug
    ```
 
-2. **Check for spelling errors**:
+2. **Check specific files**:
 
    ```bash
-   # Install and run spell checker
-   npm install -g cspell
-   cspell "data/**/*.json"
+   npm start validate --files path/to/file.json --verbose
    ```
 
-3. **Run Vale linting** (if installed):
+3. **Analyze logs**:
    ```bash
-   vale docs/
+   npm run logs:view
    ```
 
 ## Code of Conduct
@@ -249,6 +440,7 @@ If you experience or witness unacceptable behavior, please report it to the proj
 - **Issues**: Use GitHub Issues for bug reports and feature requests
 - **Discussions**: Use GitHub Discussions for questions and general discussion
 - **Documentation**: Check the `docs/` directory for detailed guides
+- **CLI Help**: Run `npm start --help` for CLI usage information
 
 ## Recognition
 

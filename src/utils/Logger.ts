@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import { createWriteStream, WriteStream } from 'fs';
-import { join } from 'path';
 
 export enum LogLevel {
     ERROR = 0,

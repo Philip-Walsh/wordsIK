@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import boxen from 'boxen';
 import { ValidationManager } from './ValidationManager';
 import { ReportGenerator } from './utils/ReportGenerator';
+import { Logger, LogLevel } from './utils/Logger';
 import { CLIOptions } from './types';
 
 const program = new Command();
@@ -38,9 +39,24 @@ program
     .option('-o, --output <format>', 'Output format (text, json, markdown)', 'text')
     .option('-v, --verbose', 'Verbose output')
     .option('-q, --quiet', 'Quiet mode (errors only)')
+    .option('--debug', 'Enable debug logging')
+    .option('--log-file <file>', 'Write logs to file')
+    .option('--no-colors', 'Disable colored output')
     .option('--fail-on-warnings', 'Exit with error code on warnings')
-    .action(async (options: CLIOptions) => {
+    .action(async (options: CLIOptions & { debug?: boolean; logFile?: string; colors?: boolean }) => {
         try {
+            // Initialize logger
+            const logger = new Logger({
+                level: options.debug ? LogLevel.DEBUG : options.verbose ? LogLevel.VERBOSE : LogLevel.INFO,
+                quiet: options.quiet,
+                verbose: options.verbose,
+                logFile: options.logFile,
+                colors: options.colors !== false
+            });
+
+            logger.section('WordsIK Validation');
+            logger.info('Starting validation process', 'CLI');
+
             const manager = new ValidationManager(options);
             const result = await manager.runValidation();
 
@@ -54,9 +70,19 @@ program
             }
 
             const shouldFail = !result.success || (options.failOnWarnings && result.warnings.length > 0);
-            process.exit(shouldFail ? 1 : 0);
+
+            if (shouldFail) {
+                logger.error('Validation failed', 'CLI', { errors: result.errors.length, warnings: result.warnings.length });
+                process.exit(1);
+            } else {
+                logger.success('Validation completed successfully', 'CLI');
+            }
+
+            logger.close();
         } catch (error) {
-            console.error(chalk.red('❌ Validation failed:'), error instanceof Error ? error.message : 'Unknown error');
+            const logger = new Logger();
+            logger.error('Validation failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.close();
             process.exit(1);
         }
     });
@@ -65,8 +91,22 @@ program
     .command('status')
     .description('Show validation status for all languages')
     .option('-o, --output <format>', 'Output format (text, json, markdown)', 'text')
-    .action(async (options: { output: string }) => {
+    .option('-v, --verbose', 'Verbose output')
+    .option('--debug', 'Enable debug logging')
+    .option('--log-file <file>', 'Write logs to file')
+    .option('--no-colors', 'Disable colored output')
+    .action(async (options: { output: string; verbose?: boolean; debug?: boolean; logFile?: string; colors?: boolean }) => {
         try {
+            const logger = new Logger({
+                level: options.debug ? LogLevel.DEBUG : options.verbose ? LogLevel.VERBOSE : LogLevel.INFO,
+                verbose: options.verbose,
+                logFile: options.logFile,
+                colors: options.colors !== false
+            });
+
+            logger.section('Language Status Check');
+            logger.info('Checking language status', 'CLI');
+
             const manager = new ValidationManager({ languages: true, output: options.output });
             const result = await manager.runValidation();
 
@@ -74,8 +114,12 @@ program
             const report = generator.generateStatusReport(result);
 
             console.log(report);
+            logger.success('Status check completed', 'CLI');
+            logger.close();
         } catch (error) {
-            console.error(chalk.red('❌ Status check failed:'), error instanceof Error ? error.message : 'Unknown error');
+            const logger = new Logger();
+            logger.error('Status check failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.close();
             process.exit(1);
         }
     });
@@ -86,20 +130,37 @@ program
     .argument('<file>', 'English source file')
     .argument('<language>', 'Target language')
     .option('-o, --output <file>', 'Output file path')
-    .action(async (file: string, language: string, options: { output?: string }) => {
+    .option('-v, --verbose', 'Verbose output')
+    .option('--debug', 'Enable debug logging')
+    .option('--log-file <file>', 'Write logs to file')
+    .action(async (file: string, language: string, options: { output?: string; verbose?: boolean; debug?: boolean; logFile?: string }) => {
         try {
+            const logger = new Logger({
+                level: options.debug ? LogLevel.DEBUG : options.verbose ? LogLevel.VERBOSE : LogLevel.INFO,
+                verbose: options.verbose,
+                logFile: options.logFile
+            });
+
+            logger.section('Template Generation');
+            logger.info(`Generating template for ${language}`, 'CLI', { sourceFile: file });
+
             const manager = new ValidationManager({});
             const template = await manager.generateTranslationTemplate(file, language);
 
             if (options.output) {
                 const fs = require('fs');
                 fs.writeFileSync(options.output, JSON.stringify(template, null, 2));
-                console.log(chalk.green(`✅ Template saved to ${options.output}`));
+                logger.success(`Template saved to ${options.output}`, 'CLI');
             } else {
                 console.log(JSON.stringify(template, null, 2));
+                logger.success('Template generated successfully', 'CLI');
             }
+
+            logger.close();
         } catch (error) {
-            console.error(chalk.red('❌ Template generation failed:'), error instanceof Error ? error.message : 'Unknown error');
+            const logger = new Logger();
+            logger.error('Template generation failed', 'CLI', error instanceof Error ? error.message : 'Unknown error');
+            logger.close();
             process.exit(1);
         }
     });

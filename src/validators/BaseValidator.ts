@@ -1,13 +1,16 @@
 import { ValidationResult, ValidationError, ValidationWarning } from '../types';
-import chalk from 'chalk';
+import { Logger, LogLevel } from '../utils/Logger';
 
 export abstract class BaseValidator {
     protected errors: ValidationError[] = [];
     protected warnings: ValidationWarning[] = [];
-    protected verbose: boolean = false;
+    protected logger: Logger;
 
     constructor(verbose: boolean = false) {
-        this.verbose = verbose;
+        this.logger = new Logger({
+            level: verbose ? LogLevel.DEBUG : LogLevel.INFO,
+            verbose: verbose
+        });
     }
 
     protected addError(message: string, file?: string, line?: number, column?: number, context?: string): void {
@@ -21,11 +24,7 @@ export abstract class BaseValidator {
         };
         this.errors.push(error);
 
-        if (this.verbose) {
-            console.error(chalk.red(`❌ ERROR: ${message}`));
-            if (file) console.error(chalk.gray(`   File: ${file}`));
-            if (context) console.error(chalk.gray(`   Context: ${context}`));
-        }
+        this.logger.error(message, context || file);
     }
 
     protected addWarning(message: string, file?: string, line?: number, column?: number, context?: string): void {
@@ -39,17 +38,23 @@ export abstract class BaseValidator {
         };
         this.warnings.push(warning);
 
-        if (this.verbose) {
-            console.warn(chalk.yellow(`⚠️  WARNING: ${message}`));
-            if (file) console.warn(chalk.gray(`   File: ${file}`));
-            if (context) console.warn(chalk.gray(`   Context: ${context}`));
-        }
+        this.logger.warn(message, context || file);
     }
 
-    protected log(message: string): void {
-        if (this.verbose) {
-            console.log(chalk.blue(`ℹ️  ${message}`));
-        }
+    protected log(message: string, context?: string): void {
+        this.logger.info(message, context);
+    }
+
+    protected debug(message: string, context?: string, data?: any): void {
+        this.logger.debug(message, context, data);
+    }
+
+    protected success(message: string, context?: string): void {
+        this.logger.success(message, context);
+    }
+
+    protected progress(message: string, context?: string): void {
+        this.logger.progress(message, context);
     }
 
     public getResult(): ValidationResult {
@@ -66,5 +71,9 @@ export abstract class BaseValidator {
     public clear(): void {
         this.errors = [];
         this.warnings = [];
+    }
+
+    public close(): void {
+        this.logger.close();
     }
 } 
