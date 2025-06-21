@@ -310,6 +310,40 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Open source tools that power our validation system
 - Educational institutions that use our content
 
+## Switching Between Canonical and Forked Content Sources
+
+By default, all examples use the official WordsIK repository:
+
+```
+https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/...
+```
+
+If you fork the repository for your own use, update the base URL in your code to:
+
+```
+https://raw.githubusercontent.com/<your-username>/wordsIK/<branch>/...
+```
+
+**Tip:** Use a variable or config to easily switch between the official repo and your fork for testing or private use.
+
+### Example: Switching Base URLs
+
+```js
+// Set this to the canonical repo or your fork as needed
+const BASE_URL = "https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/";
+// For your fork:
+// const BASE_URL = "https://raw.githubusercontent.com/your-username/wordsIK/main/";
+
+const filePath = "data/vocabulary/en/grade-1/week-1.json";
+fetch(BASE_URL + filePath)
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+```
+
+- **For public/official use:** Always use the canonical repo.
+- **For private/custom use:** Use your own fork/branch.
+- **For testing:** Use a config or environment variable to switch easily.
+
 ---
 
 **Made with ❤️ for education**
