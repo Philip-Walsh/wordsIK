@@ -78,21 +78,21 @@ export class TranslationValidator extends BaseValidator {
         }
     }
 
-    private validateTranslationAccuracy(englishData: any, translationData: any, comparison: TranslationComparison): void {
+    private validateTranslationAccuracy(englishData: ValidationData, translationData: ValidationData, comparison: TranslationComparison): void {
         // Handle both flat structure (ValidationData) and nested structure (VocabularyData)
         let englishWords: WordData[] = [];
         let translationWords: WordData[] = [];
 
         if (englishData.words && Array.isArray(englishData.words)) {
             englishWords = englishData.words;
-        } else if (englishData.vocabulary && englishData.vocabulary.words && Array.isArray(englishData.vocabulary.words)) {
-            englishWords = englishData.vocabulary.words;
+        } else if ((englishData as any).vocabulary && (englishData as any).vocabulary.words && Array.isArray((englishData as any).vocabulary.words)) {
+            englishWords = (englishData as any).vocabulary.words;
         }
 
         if (translationData.words && Array.isArray(translationData.words)) {
             translationWords = translationData.words;
-        } else if (translationData.vocabulary && translationData.vocabulary.words && Array.isArray(translationData.vocabulary.words)) {
-            translationWords = translationData.vocabulary.words;
+        } else if ((translationData as any).vocabulary && (translationData as any).vocabulary.words && Array.isArray((translationData as any).vocabulary.words)) {
+            translationWords = (translationData as any).vocabulary.words;
         }
 
         const englishWordsMap = new Map<string, WordData>();

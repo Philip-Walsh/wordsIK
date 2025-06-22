@@ -7,6 +7,8 @@ export class LanguageValidator extends BaseValidator {
     private readonly supportedLanguages: SupportedLanguage[] = ['en', 'es', 'fr', 'ar', 'ko'];
     private readonly gradeLevels: GradeLevel[] = ['grade-1', 'grade-2', 'grade-3', 'grade-4', 'grade-5'];
     private readonly contentTypes: ContentType[] = ['vocabulary', 'grammar', 'spelling'];
+    private wordCount: number = 0;
+    private fileCount: number = 0;
 
     constructor(verbose: boolean = false) {
         super(verbose);
@@ -75,6 +77,7 @@ export class LanguageValidator extends BaseValidator {
     private validateLanguageFile(filePath: string, language: SupportedLanguage): void {
         try {
             const data: ValidationData = FileUtils.readJsonFile(filePath);
+            this.fileCount++;
             this.validateLanguageSpecificContent(data, filePath, language);
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -92,10 +95,21 @@ export class LanguageValidator extends BaseValidator {
         } else if (data.vocabulary && data.vocabulary.words && Array.isArray(data.vocabulary.words)) {
             // Nested structure: data.vocabulary.words
             words = data.vocabulary.words;
+        } else if (data.grammar && data.grammar.rules && Array.isArray(data.grammar.rules)) {
+            // Grammar rules structure
+            words = data.grammar.rules.map((rule: { name?: string; title?: string; description?: string; explanation?: string; example?: string }) => ({
+                word: rule.name || rule.title || 'grammar-rule',
+                translation: rule.description || '',
+                definition: rule.explanation || '',
+                example: rule.example || ''
+            }));
         } else {
             this.addError('Missing or invalid words array', filePath);
             return;
         }
+
+        // Count words
+        this.wordCount += words.length;
 
         words.forEach((word: WordData, index: number) => {
             this.validateWordLanguage(word, filePath, language, index);
@@ -124,8 +138,8 @@ export class LanguageValidator extends BaseValidator {
 
     protected generateSummary(): ValidationSummary {
         return {
-            totalFiles: this.errors.length + this.warnings.length,
-            totalWords: 0,
+            totalFiles: this.fileCount,
+            totalWords: this.wordCount,
             errors: this.errors.length,
             warnings: this.warnings.length,
             languages: []
