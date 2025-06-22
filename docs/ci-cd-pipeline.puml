@@ -1,1 +1,62 @@
- 
+@startuml WordsIK CI/CD Pipeline
+
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+
+title WordsIK CI/CD Pipeline
+
+start
+
+:Developer creates PR;
+
+:GitHub Actions triggered;
+
+fork
+  :Security Scanning;
+  :Gitleaks scan;
+  :TruffleHog scan;
+  :Pattern matching;
+fork again
+  :Code Quality;
+  :TypeScript compilation;
+  :ESLint checks;
+  :Jest unit tests;
+fork again
+  :Content Validation;
+  :JSON syntax validation;
+  :Content quality checks;
+  :Profanity filtering;
+  :Translation validation;
+fork again
+  :Documentation;
+  :Spell checking (cspell);
+  :Documentation linting;
+  :Vale integration;
+end fork
+
+if (All checks pass?) then (yes)
+  :Status: ✅ Success;
+  :PR ready for review;
+else (no)
+  :Status: ❌ Failed;
+  :Developer notified;
+  :Fix issues and retry;
+  stop
+endif
+
+:Code review process;
+if (Review approved?) then (yes)
+  :Merge to main branch;
+  :Deploy to production;
+  :Update documentation;
+else (no)
+  :Request changes;
+  :Developer updates PR;
+  :Re-run pipeline;
+endif
+
+stop
+
+@enduml 

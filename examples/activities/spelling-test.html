@@ -51,7 +51,7 @@
 
     <script>
         async function loadSpellingList() {
-            const response = await fetch('https://raw.githubusercontent.com/yourusername/words-i-know/main/data/spelling/en/grade-1/week-1.json');
+            const response = await fetch('https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/spelling/en/grade-1/week-1.json');
             const data = await response.json();
             return data.words;
         }
