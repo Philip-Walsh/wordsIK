@@ -22,7 +22,6 @@ WordsIK is a free, high-quality repository of multilingual educational content t
 - **Enhance vocabulary lessons** with age-appropriate content
 - **Support language learning** in multiple languages
 - **Create engaging activities** for students
-- **Access culturally sensitive** educational materials
 - **Build lesson plans** with ready-to-use content
 
 ### Quick Start
