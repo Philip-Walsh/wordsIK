@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordsIK Vue Demo</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .wordsik-app {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40vh;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            margin: 0 0 10px;
+            font-size: 2.5em;
+            color: #2c3e50;
+        }
+
+        .hero-content p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #34495e;
+        }
+
+        .selectors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: end;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            min-width: 150px;
+        }
+
+        .field label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .field select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .field select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .content h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .content h3 {
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        .metadata {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .metadata p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .vocab-list,
+        .grammar-rules,
+        .spelling-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .vocab-entry,
+        .spelling-entry {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .word {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .translation {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        .definition {
+            margin: 8px 0;
+            color: #34495e;
+        }
+
+        .example {
+            margin: 8px 0;
+            color: #27ae60;
+            font-style: italic;
+        }
+
+        .phonetic {
+            color: #e74c3c;
+            font-family: monospace;
+            margin-left: 10px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .difficulty.easy {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .difficulty.medium {
+            background: #f39c12;
+            color: white;
+        }
+
+        .difficulty.hard {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .activities {
+            margin-top: 20px;
+        }
+
+        .activity {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .activity h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+        }
+
+        .error {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .debug-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 15px;
+            border-top-right-radius: 10px;
+            z-index: 100;
+            max-width: 400px;
+            font-family: monospace;
+            backdrop-filter: blur(5px);
+        }
+
+        .debug-overlay p {
+            margin: 2px 0;
+        }
+
+        .status-success {
+            color: #2ecc71;
+        }
+
+        .status-error {
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .selectors {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .field {
+                min-width: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="wordsik-app">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="glass hero-content">
+                    <h1>WordsIK: Words I Know</h1>
+                    <p>
+                        A collaborative repository for educational vocabulary, grammar, and spelling resources.
+                        Select a content type, language, grade, and week to explore learning materials.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Selector Controls -->
+            <div class="selectors glass">
+                <div class="field">
+                    <label for="contentType">Content Type:</label>
+                    <select id="contentType" v-model="contentType">
+                        <option v-for="type in contentTypes" :value="type" :key="type">
+                            {{ type }}
+                        </option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="language">Language:</label>
+                    <select id="language" v-model="language">
+                        <option v-for="lang in languages" :value="lang.code" :key="lang.code">
+                            {{ lang.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="grade">Grade:</label>
+                    <select id="grade" v-model="grade">
+                        <option v-for="g in grades" :value="g" :key="g">{{ g }}</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="week">Week:</label>
+                    <select id="week" v-model="week">
+                        <option v-for="w in weeks" :value="w" :key="w">{{ w }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Content Display -->
+            <div class="content">
+                <h2 v-if="contentType">
+                    Showing {{ contentType }} (Grade {{ grade }}, Week {{ week }})
+                </h2>
+
+                <div v-if="loading" class="loading">
+                    Loading content...
+                </div>
+
+                <p v-if="error" class="error">{{ error }}</p>
+
+                <div v-if="content && !loading">
+                    <!-- Metadata -->
+                    <div v-if="content.metadata" class="metadata glass">
+                        <h3>Content Information</h3>
+                        <p><strong>Theme:</strong> {{ content.metadata.theme }}</p>
+                        <p><strong>Version:</strong> {{ content.metadata.version }}</p>
+                        <p><strong>Last Updated:</strong> {{ content.metadata.lastUpdated }}</p>
+                    </div>
+
+                    <!-- Vocabulary Content -->
+                    <div v-if="contentType === 'Vocabulary' && content.vocabulary">
+                        <div class="glass">
+                            <h3>{{ content.vocabulary.description }}</h3>
+
+                            <div v-if="content.vocabulary.learningObjectives">
+                                <h4>Learning Objectives:</h4>
+                                <ul>
+                                    <li v-for="objective in content.vocabulary.learningObjectives" :key="objective">
+                                        {{ objective }}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div v-if="content.vocabulary.words">
+                                <h4>Vocabulary Words:</h4>
+                                <ul class="vocab-list">
+                                    <li v-for="item in content.vocabulary.words" :key="item.word">
+                                        <div class="vocab-entry">
+                                            <strong class="word">{{ item.word }}</strong>
+                                            <span class="translation">({{ item.translation }})</span>
+                                            <span v-if="item.difficulty" :class="['difficulty', item.difficulty]">
+                                                {{ item.difficulty }}
+                                            </span>
+                                            <div class="definition">{{ item.definition }}</div>
+                                            <div class="example">Example: <em>{{ item.example }}</em></div>
+                                            <div v-if="item.phonetic" class="phonetic">[{{ item.phonetic }}]</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grammar Content -->
+                    <div v-else-if="contentType === 'Grammar' && content.grammar">
+                        <div class="glass">
+                            <h3>Grammar Rules</h3>
+                            <div v-if="content.grammar.rules">
+                                <ul class="grammar-rules">
+                                    <li v-for="rule in content.grammar.rules" :key="rule.name || rule.title">
+                                        <strong>{{ rule.name || rule.title }}:</strong> {{ rule.description ||
+                                        rule.explanation }}
+                                        <div v-if="rule.example" class="example">Example: {{ rule.example }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spelling Content -->
+                    <div v-else-if="contentType === 'Spelling' && content.words">
+                        <div class="glass">
+                            <h3>Spelling Words</h3>
+                            <ul class="spelling-list">
+                                <li v-for="word in content.words" :key="word.word">
+                                    <div class="spelling-entry">
+                                        <strong class="word">{{ word.word }}</strong>
+                                        <span v-if="word.phonetic" class="phonetic">[{{ word.phonetic }}]</span>
+                                        <div v-if="word.practice && word.practice.rhymingWords" class="rhymes">
+                                            Rhymes with: {{ word.practice.rhymingWords.join(', ') }}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Letters Content -->
+                    <div v-else-if="contentType === 'Letters' && content.letters">
+                        <div class="glass">
+                            <h3>Letters</h3>
+                            <p><strong>Alphabet:</strong> {{ content.letters.join(' ') }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Activities -->
+                    <div v-if="content.activities" class="activities glass">
+                        <h3>Activities</h3>
+                        <div v-for="activity in content.activities" :key="activity.type" class="activity">
+                            <h4>{{ activity.type }}</h4>
+                            <p><strong>Description:</strong> {{ activity.description }}</p>
+                            <p><strong>Instructions:</strong> {{ activity.instructions }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Assessment -->
+                    <div v-if="content.assessment" class="glass">
+                        <h3>Assessment</h3>
+                        <p><strong>Type:</strong> {{ content.assessment.type }}</p>
+                        <p><strong>Description:</strong> {{ content.assessment.description }}</p>
+                        <div v-if="content.assessment.criteria">
+                            <strong>Criteria:</strong>
+                            <ul>
+                                <li v-for="criterion in content.assessment.criteria" :key="criterion">
+                                    {{ criterion }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Debug Output -->
+            <div class="debug-overlay">
+                <p><strong>Debug Info</strong></p>
+                <p>Content Type: {{ contentType }}</p>
+                <p>Language: {{ language }}</p>
+                <p>Grade: {{ grade }}</p>
+                <p>Week: {{ week }}</p>
+                <p>Last URL: {{ debugUrl }}</p>
+                <p :class="error ? 'status-error' : 'status-success'">
+                    Status: {{ error ? '❌ ' + error : '✅ Loaded' }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    contentType: 'Vocabulary',
+                    contentTypes: ['Vocabulary', 'Grammar', 'Spelling', 'Letters'],
+                    language: 'en',
+                    languages: [
+                        { name: 'English', code: 'en' },
+                        { name: 'Spanish', code: 'es' },
+                        { name: 'French', code: 'fr' },
+                        { name: 'Arabic', code: 'ar' },
+                        { name: 'Korean', code: 'ko' }
+                    ],
+                    grade: 1,
+                    grades: [1, 2, 3, 4, 5],
+                    week: 1,
+                    weeks: [1, 2, 3, 4, 5],
+                    content: null,
+                    error: null,
+                    loading: false,
+                    debugUrl: ''
+                };
+            },
+            watch: {
+                contentType: 'loadData',
+                language: 'loadData',
+                grade: 'loadData',
+                week: 'loadData'
+            },
+            mounted() {
+                this.loadData();
+            },
+            methods: {
+                loadData() {
+                    this.loading = true;
+                    this.error = null;
+
+                    const typeFolder = this.contentType.toLowerCase();
+                    const url = `https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/${typeFolder}/${this.language}/grade-${this.grade}/week-${this.week}.json`;
+                    this.debugUrl = url;
+
+                    fetch(url)
+                        .then(res => {
+                            if (!res.ok) {
+                                throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                            }
+                            return res.json();
+                        })
+                        .then(data => {
+                            this.content = data;
+                            this.error = null;
+                            this.loading = false;
+                        })
+                        .catch(err => {
+                            console.error('Fetch error:', err);
+                            this.content = null;
+                            this.error = `Content not available for this selection. (${err.message})`;
+                            this.loading = false;
+                        });
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
