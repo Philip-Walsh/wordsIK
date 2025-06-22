@@ -1,4 +1,4 @@
-import { ValidationResult, ValidationError, ValidationWarning, LogData } from '../types/index.js';
+import { ValidationResult, ValidationError, ValidationWarning, LogData, ValidationSummary } from '../types/index.js';
 import { Logger, LogLevel } from '../utils/Logger.js';
 
 export abstract class BaseValidator {
@@ -58,21 +58,16 @@ export abstract class BaseValidator {
     }
 
     public getResult(): ValidationResult {
+        const summary = this.generateSummary();
         return {
             success: this.errors.length === 0,
             errors: [...this.errors],
             warnings: [...this.warnings],
-            summary: {
-                totalFiles: this.errors.length + this.warnings.length,
-                totalWords: 0,
-                errors: this.errors.length,
-                warnings: this.warnings.length,
-                languages: []
-            }
+            summary
         };
     }
 
-    protected abstract generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] };
+    protected abstract generateSummary(): ValidationSummary;
 
     public clear(): void {
         this.errors = [];

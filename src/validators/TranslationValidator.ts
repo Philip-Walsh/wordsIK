@@ -1,5 +1,5 @@
 import { BaseValidator } from './BaseValidator.js';
-import { TranslationComparison, ValidationData, WordData } from '../types/index.js';
+import { TranslationComparison, ValidationData, WordData, ValidationSummary } from '../types/index.js';
 import { FileUtils } from '../utils/FileUtils.js';
 
 export class TranslationValidator extends BaseValidator {
@@ -174,7 +174,7 @@ export class TranslationValidator extends BaseValidator {
         return languageIndex !== -1 ? pathParts[languageIndex] : 'unknown';
     }
 
-    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
+    protected generateSummary(): ValidationSummary {
         return {
             totalFiles: this.errors.length + this.warnings.length,
             totalWords: 0,

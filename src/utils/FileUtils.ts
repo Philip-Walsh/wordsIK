@@ -53,7 +53,9 @@ export class FileUtils {
     public static getJsonFilesInDirectory(dirPath: string): string[] {
         try {
             if (!fs.existsSync(dirPath)) return [];
-            return fs.readdirSync(dirPath).filter(file => file.endsWith('.json'));
+            return fs.readdirSync(dirPath)
+                .filter(file => file.endsWith('.json'))
+                .map(file => path.join(dirPath, file));
         } catch {
             return [];
         }

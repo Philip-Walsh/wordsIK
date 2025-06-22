@@ -1,5 +1,6 @@
 import { BaseValidator } from './BaseValidator.js';
 import { FileUtils } from '../utils/FileUtils.js';
+import { ValidationSummary } from '../types/index.js';
 
 export class JsonValidator extends BaseValidator {
     constructor(verbose: boolean = false) {
@@ -16,7 +17,7 @@ export class JsonValidator extends BaseValidator {
         }
     }
 
-    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
+    protected generateSummary(): ValidationSummary {
         return {
             totalFiles: this.errors.length + this.warnings.length,
             totalWords: 0,

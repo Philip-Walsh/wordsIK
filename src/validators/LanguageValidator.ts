@@ -1,5 +1,5 @@
 import { BaseValidator } from './BaseValidator.js';
-import { SupportedLanguage, ContentType, ValidationData, WordData, GradeLevel } from '../types/index.js';
+import { SupportedLanguage, ContentType, ValidationData, WordData, GradeLevel, ValidationSummary } from '../types/index.js';
 import { FileUtils } from '../utils/FileUtils.js';
 import { LanguageUtils } from '../utils/LanguageUtils.js';
 
@@ -122,13 +122,13 @@ export class LanguageValidator extends BaseValidator {
         // Implementation for cross-language consistency check
     }
 
-    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
+    protected generateSummary(): ValidationSummary {
         return {
             totalFiles: this.errors.length + this.warnings.length,
             totalWords: 0,
             errors: this.errors.length,
             warnings: this.warnings.length,
-            languages: this.supportedLanguages
+            languages: []
         };
     }
 } 

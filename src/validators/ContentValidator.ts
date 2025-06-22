@@ -1,10 +1,11 @@
 import { BaseValidator } from './BaseValidator.js';
 import { FileUtils } from '../utils/FileUtils.js';
 import Filter from 'bad-words';
-import { ValidationData, WordData } from '../types/index.js';
+import { ValidationData, WordData, ValidationSummary } from '../types/index.js';
 
 export class ContentValidator extends BaseValidator {
     private filter: Filter;
+    private wordCount: number = 0;
 
     constructor(verbose: boolean = false) {
         super(verbose);
@@ -64,6 +65,10 @@ export class ContentValidator extends BaseValidator {
             return;
         }
 
+        // Count words
+        this.wordCount += data.words.length;
+        this.debug(`Found ${data.words.length} spelling words in ${filePath}, total count: ${this.wordCount}`);
+
         // Validate each word in spelling format
         data.words.forEach((word: any, index: number) => {
             this.validateSpellingWord(word, filePath, index);
@@ -82,6 +87,11 @@ export class ContentValidator extends BaseValidator {
 
         if (!data.grammar.rules || !Array.isArray(data.grammar.rules)) {
             this.addError('Missing or invalid grammar rules array', filePath);
+        }
+
+        // Count grammar rules as "words" for summary purposes
+        if (data.grammar.rules) {
+            this.wordCount += data.grammar.rules.length;
         }
     }
 
@@ -119,6 +129,10 @@ export class ContentValidator extends BaseValidator {
             this.addError('Missing or invalid words array', filePath);
             return;
         }
+
+        // Count words
+        this.wordCount += words.length;
+        this.debug(`Found ${words.length} words in ${filePath}, total count: ${this.wordCount}`);
 
         words.forEach((word: WordData, index: number) => {
             this.validateVocabularyWord(word, filePath, index);
@@ -180,10 +194,10 @@ export class ContentValidator extends BaseValidator {
         }
     }
 
-    protected generateSummary(): { totalFiles: number; totalWords: number; errors: number; warnings: number; languages: string[] } {
+    protected generateSummary(): ValidationSummary {
         return {
             totalFiles: this.errors.length + this.warnings.length,
-            totalWords: 0, // Would need to track this during validation
+            totalWords: this.wordCount,
             errors: this.errors.length,
             warnings: this.warnings.length,
             languages: []
