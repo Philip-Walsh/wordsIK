@@ -15,7 +15,7 @@ https://raw.githubusercontent.com/[username]/[repo]/[branch]/[path/to/file]
 For the main WordsIK repo:
 
 ```
-https://raw.githubusercontent.com/wordsik/wordsIK/main/data/vocabulary/en/grade-1/week-1.json
+https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/vocabulary/en/grade-1/week-1.json
 ```
 
 ### Example: Fetching in the Browser
@@ -23,7 +23,7 @@ https://raw.githubusercontent.com/wordsik/wordsIK/main/data/vocabulary/en/grade-
 ```js
 // Fetch a vocabulary file from GitHub
 fetch(
-  "https://raw.githubusercontent.com/wordsik/wordsIK/main/data/vocabulary/en/grade-1/week-1.json"
+  "https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/vocabulary/en/grade-1/week-1.json"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -38,7 +38,7 @@ fetch(
 const https = require("https");
 
 const url =
-  "https://raw.githubusercontent.com/wordsik/wordsIK/main/data/vocabulary/en/grade-1/week-1.json";
+  "https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/vocabulary/en/grade-1/week-1.json";
 https.get(url, (res) => {
   let data = "";
   res.on("data", (chunk) => (data += chunk));
@@ -55,7 +55,7 @@ Or using `node-fetch`:
 const fetch = require("node-fetch");
 
 fetch(
-  "https://raw.githubusercontent.com/wordsik/wordsIK/main/data/vocabulary/en/grade-1/week-1.json"
+  "https://raw.githubusercontent.com/Philip-Walsh/wordsIK/main/data/vocabulary/en/grade-1/week-1.json"
 )
   .then((res) => res.json())
   .then((json) => console.log(json));
