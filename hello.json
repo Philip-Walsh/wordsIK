@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "language": "en",
+    "grade": "1",
+    "category": "greetings",
+    "version": "1.0",
+    "lastUpdated": "2024-03-20",
+    "contributor": "wordsIK-team",
+    "tags": ["greetings", "basic", "introduction", "hello"]
+  },
+  "words": [
+    {
+      "word": "hello",
+      "translation": "hola",
+      "definition": "A greeting used when meeting someone",
+      "example": "Hello! How are you today?",
+      "difficulty": "easy",
+      "tags": ["greetings", "basic"],
+      "pronunciation": "həˈloʊ",
+      "synonyms": ["hi", "hey"],
+      "antonyms": ["goodbye"],
+      "notes": "One of the first words children learn"
+    },
+    {
+      "word": "welcome",
+      "translation": "bienvenido",
+      "definition": "A friendly greeting to someone arriving",
+      "example": "Welcome to our classroom!",
+      "difficulty": "easy",
+      "tags": ["greetings", "basic"],
+      "pronunciation": "ˈwɛlkəm",
+      "synonyms": ["greetings"],
+      "antonyms": ["farewell"],
+      "notes": "Used to make people feel comfortable"
+    }
+  ],
+  "validation": {
+    "spellingVerified": true,
+    "grammarChecked": true,
+    "ageAppropriate": true,
+    "culturallySensitive": true
+  }
+}
